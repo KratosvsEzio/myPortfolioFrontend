@@ -3,9 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  name: 'dev',
-  apiBaseUrl: 'https://gre-api-staging.df.r.appspot.com/api/v1/'
+  production: false
 };
 
 /*

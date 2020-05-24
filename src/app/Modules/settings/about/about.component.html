@@ -1,0 +1,52 @@
+<form class="row justify-content-center" [formGroup]="aboutForm" (ngSubmit)="onSubmit()">
+  <div class="col-md-8 d-flex flex-column justify-content-center">
+
+    <!-- Completed Projects Input Field -->
+    <mat-form-field appearance="outline">
+      <!-- Input Label -->
+      <mat-label>Enter Completed Projects</mat-label>
+      <!-- Input -->
+      <!-- use "[formControl]='formGroupName.get(formControlName)'"
+          instead of "formControlName=fromControlName"  -->
+      <input class="input" formControlName="completedProjects" type="text" matInput>
+      <!-- Input Errors -->
+      <mat-error *ngIf="!!aboutForm.get('completedProjects').hasError('required')">
+        Completed Projects is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Working On Input Field -->
+    <mat-form-field appearance="outline">
+      <!-- Input Label -->
+      <mat-label>Enter Working On</mat-label>
+      <!-- Input -->
+      <!-- use "[formControl]='formGroupName.get(formControlName)'"
+          instead of "formControlName=fromControlName"  -->
+      <input class="input" formControlName="workingOn" type="text" matInput>
+      <!-- Input Errors -->
+      <mat-error *ngIf="!!aboutForm.get('workingOn').hasError('required')">
+        Working On is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- About Me Input Field -->
+    <mat-form-field appearance="outline">
+      <!-- Input Label -->
+      <mat-label>Enter About Me</mat-label>
+      <!-- Input -->
+      <!-- use "[formControl]='formGroupName.get(formControlName)'"
+          instead of "formControlName=fromControlName"  -->
+      <textarea class="input" type="text" formControlName="aboutMe" matInput></textarea>
+      <!-- Input Errors -->
+      <mat-error *ngIf="!!aboutForm.get('aboutMe').hasError('required')">
+        About Me is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-end">
+        <button [disabled]="!aboutForm.valid" class="btn btn-primary" type="submit">Send</button>
+      </div>
+    </div>
+
+  </div>
+</form>

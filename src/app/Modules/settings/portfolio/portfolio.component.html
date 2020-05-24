@@ -1,0 +1,97 @@
+<form class="row justify-content-center" [formGroup]="portfolioForm">
+  <div class="col-md-8 d-flex justify-content-end mb-3">
+    <button class="btn-sm btn-primary" type="button" (click)='createPortfolio()'>Add New</button>
+  </div>
+
+  <div *ngIf="!isloading && eventCaller === -1" class="col-md-8 d-flex flex-column align-items-center">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="portfolios; else noItems" class="col-md-8 d-flex flex-column justify-content-center">
+    <div formArrayName = "listArray">
+      <div *ngFor="let item of listArray.controls; let i = index" class="mb-3" [formGroup]="item">
+        <!-- Card -->
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-spinner class="mr-1" [diameter]="22" *ngIf="!isloading && i=== eventCaller"></mat-spinner>
+              {{portfolios[i].name}}
+            </mat-expansion-panel-header>
+            <div class="d-flex flex-column">
+              <!-- Portfolio Image URL Input Field -->
+              <mat-form-field  class="mt-1" appearance="standard">
+
+                <!-- Input Label -->
+                <mat-label>Enter Image URL</mat-label>
+
+                <!-- Input -->
+                <!-- use "[formControl]='formGroupName.get(formControlName)'"
+                    instead of "formControlName=fromControlName" for errors in A.Materials -->
+                <input class="input" formControlName='img' type="text" matInput>
+              </mat-form-field>
+
+              <!-- Portfolio Project Name Input Field -->
+              <mat-form-field  class="mt-1" appearance="standard">
+
+                <!-- Input Label -->
+                <mat-label>Enter Project Name</mat-label>
+
+                <!-- Input -->
+                <!-- use "[formControl]='formGroupName.get(formControlName)'"
+                    instead of "formControlName=fromControlName"  -->
+                <input class="input" formControlName='name' type="text" matInput>
+              </mat-form-field>
+
+              <!-- Portfolio Category Input Field -->
+              <mat-form-field  class="mt-1" appearance="standard">
+
+                <!-- Input Label -->
+                <mat-label>Enter Category</mat-label>
+
+                <!-- Input -->
+                <!-- use "[formControl]='formGroupName.get(formControlName)'"
+                    instead of "formControlName=fromControlName"  -->
+                <input class="input" formControlName='category' type="text" matInput>
+              </mat-form-field>
+
+              <!-- Portfolio Demo URL Input Field -->
+              <mat-form-field  class="mt-1" appearance="standard">
+
+                <!-- Input Label -->
+                <mat-label>Enter Demo URL</mat-label>
+
+                <!-- Input -->
+                <!-- use "[formControl]='formGroupName.get(formControlName)'"
+                    instead of "formControlName=fromControlName"  -->
+                <input class="input" formControlName='demoURL' type="text" matInput>
+              </mat-form-field>
+
+              <!-- Portfolio Github URL Input Field -->
+              <mat-form-field  class="mt-1" appearance="standard">
+
+                <!-- Input Label -->
+                <mat-label>Enter Github URL</mat-label>
+
+                <!-- Input -->
+                <!-- use "[formControl]='formGroupName.get(formControlName)'"
+                    instead of "formControlName=fromControlName"  -->
+                <input class="input" formControlName='gitURL' type="text" matInput>
+              </mat-form-field>
+            </div>
+
+            <div class="btn-group float-right">
+              <button type="button" class="btn-sm btn-primary mr-1" (click)="save(i, item)">Save</button>
+              <button type='button' class="btn-sm btn-warning" (click)='delete(i)'>Delete</button>
+            </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+  </div>
+  <ng-template #noItems>
+    <div *ngIf="isloading && eventCaller === -1"
+    class="col-md-8 d-flex flex-column justify-content-center text-center">
+      No items found in database
+    </div>
+  </ng-template>
+</form>
