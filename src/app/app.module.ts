@@ -29,7 +29,7 @@ import { AuthInterceptor } from './Service/auth-interceptor';
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
+    provider: new GoogleLoginProvider('5126203523-o4445m07k6m6kjj9313p8flpd2meqmpd.apps.googleusercontent.com')
   }
 ]);
 
