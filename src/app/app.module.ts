@@ -27,16 +27,16 @@ import { ServicesComponent } from './Components/services/services.component';
 import { AuthInterceptor } from './Service/auth-interceptor';
 
 // Auth0
-const config = new AuthServiceConfig([
-  {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
-  }
-]);
+// let config = new AuthServiceConfig([
+//   {
+//     id: GoogleLoginProvider.PROVIDER_ID,
+//     provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
+//   }
+// ]);
 
-export function provideConfig() {
-  return config;
-}
+// export function provideConfig() {
+//   return this.config;
+// }
 
 @NgModule({
   declarations: [
@@ -55,8 +55,16 @@ export function provideConfig() {
   ],
   imports: [
     BrowserModule,
+
     // Auth0 Module
-    SocialLoginModule.initialize(config),
+    SocialLoginModule,
+    // .initialize(new AuthServiceConfig([
+    //     {
+    //       id: GoogleLoginProvider.PROVIDER_ID,
+    //       provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
+    //     }
+    //   ])
+    // ),
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -73,7 +81,14 @@ export function provideConfig() {
     // Auth0 provider to all app
     {
       provide: AuthServiceConfig,
-      useFactory: provideConfig
+      useFactory: () => {
+        return new AuthServiceConfig([
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
+          }
+        ]);
+      }
     },
     {
     provide: HTTP_INTERCEPTORS,
