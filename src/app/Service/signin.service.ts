@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SigninService implements OnInit {
 
-  private loginURL = 'http://127.0.0.1:4000/api/login';
+  private loginURL = 'https://my-profile-backend.herokuapp.com/api/login';
 
   private user: SocialUser;
   private tokenTimer: any;
