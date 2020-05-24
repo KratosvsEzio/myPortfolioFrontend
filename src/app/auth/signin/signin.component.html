@@ -1,0 +1,45 @@
+<!-- Banner -->
+<div class="background">
+
+  <!-- Bubble Shapes -->
+  <div class="shape shape-style-1 shape-primary alpha-4">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- main section -->
+  <div class="section">
+    <div class="main">
+
+      <!-- Title -->
+      <div class="title">Sign In</div>
+
+      <!-- Form -->
+      <form [formGroup]="signinForm" (submit)="submit()">
+        <div class="inputGroup">
+          <label for="userName">Username</label>
+          <div class="input-wrapper">
+            <input type="text" formControlName = 'userName'>
+          </div>
+        </div>
+        <div class="inputGroup">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <input type="password" formControlName = 'password'>
+            <!-- <div class="input-status-wrapper">
+              <div class="input-status">Username</div>
+              <div class="invis-border-line"></div>
+            </div> -->
+          </div>
+        </div>
+
+        <button [disabled]="!signinForm.valid" type="submit" class="submit">Sign In</button>
+      </form>
+    </div>
+  </div>
+</div>

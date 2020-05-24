@@ -1,0 +1,24 @@
+<div class="main" oncontextmenu="return false">
+
+  <!-- Exit Component -->
+  <div *ngIf="exitFlag" class="exit-options">
+    <app-exit-component></app-exit-component>
+  </div>
+
+  <!-- Pause Time Component -->
+  <div *ngIf="pauseTimeFlag">
+    <app-pause-time></app-pause-time>
+  </div>
+
+  <!-- Main Components of App -->
+  <div class="gre-container">
+    <app-header></app-header>
+    <app-menu></app-menu>
+    <app-utility></app-utility>
+
+    <!-- loading spinner -->
+    <app-loading></app-loading>
+
+    <router-outlet></router-outlet>
+  </div>
+</div>

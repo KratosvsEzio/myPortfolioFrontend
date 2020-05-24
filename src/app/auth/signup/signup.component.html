@@ -1,0 +1,53 @@
+<!-- Banner -->
+<div class="background">
+
+  <!-- Bubble Shapes -->
+  <div class="shape shape-style-1 shape-primary alpha-4">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- main section -->
+  <div class="section">
+    <div class="main">
+
+      <!-- Title -->
+      <div class="title">Sign Up</div>
+
+      <!-- Form -->
+      <form [formGroup]="signupForm" (submit)="submit()">
+        <div class="inputGroup">
+          <label for="userName">Username</label>
+          <div class="input-wrapper">
+            <input type="text" name="userName" formControlName = 'userName'>
+          </div>
+        </div>
+        <div class="inputGroup">
+          <label for="email">Email</label>
+          <div class="input-wrapper">
+            <input type="email" name="email" formControlName = 'email'>
+          </div>
+        </div>
+        <div class="inputGroup">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <input type="password" name="password" formControlName = 'password'>
+          </div>
+        </div>
+        <div class="inputGroup">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="input-wrapper">
+            <input type="password" match="password" name="confirmPassword" formControlName = 'confirmPassword'>
+          </div>
+        </div>
+
+        <button [disabled]="!signupForm.valid" type="submit" class="submit">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</div>

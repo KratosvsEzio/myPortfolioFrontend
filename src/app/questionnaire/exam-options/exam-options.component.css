@@ -1,0 +1,91 @@
+.main-container{
+  margin: 10px 0;
+  text-align: left;
+}
+.main-block{
+  margin-bottom: 0px;
+  margin-top: 0px;
+  z-index: 2;
+  width: 906px;
+  height: 676px;
+  margin: 0 auto;
+  background-color: #FFF;
+  padding: 3px;
+  -webkit-box-shadow: 0px 0px 10px #818181;
+  -moz-box-shadow: 0px 0px 10px #818181;
+  position: relative;
+  top: -3px;
+  left: -1px;
+  OVERFLOW: auto;
+  overflow-x: hidden;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-right: 15px;
+  text-align: left;
+}
+
+h3{
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  margin-top: 0;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+p{
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  margin-top: 0;
+  padding-right: 15px;
+  padding-left: 15px;
+  font-size: .968em;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+
+td {
+  display: table-cell;
+  vertical-align: inherit;
+}
+
+select:not(:-internal-list-box) {
+  overflow: visible !important;
+}
+
+select {
+  -webkit-writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  color: -internal-light-dark-color(black, white);
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  -webkit-appearance: menulist;
+  box-sizing: border-box;
+  align-items: center;
+  white-space: pre;
+  -webkit-rtl-ordering: logical;
+  background-color: -internal-light-dark-color(white, black);
+  cursor: default;
+  margin: 0em;
+  font: 400 13.3333px Arial;
+  border-radius: 0px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(169, 169, 169);
+  border-image: initial;
+}

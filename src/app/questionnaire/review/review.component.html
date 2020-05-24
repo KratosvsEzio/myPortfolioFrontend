@@ -1,0 +1,25 @@
+<table>
+  <thead>
+    <tr>
+      <th>Question No.</th>
+      <th>Answer Status</th>
+      <th>Mark</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let review of reviews | async; let i= index"
+      (click)="selectQuestion(review)"
+      [ngClass]="{'selected': (review.id === selectedQuestion)}"
+    >
+      <td>{{review.id}}</td>
+      <div *ngIf="review.visited; else notVisited">
+        <td>{{review.answer}}</td>
+      </div>
+      <ng-template #notVisited>
+        <td>Not Visited</td>
+      </ng-template>
+      <td>{{review.mark}}</td>
+    </tr>
+  </tbody>
+</table>

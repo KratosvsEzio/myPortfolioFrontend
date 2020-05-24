@@ -1,0 +1,31 @@
+/*	Header CSS	*/
+.header{
+  width: 960px;
+  height: 30px;
+  background-image: url("../../../assets/images/header.gif");
+}
+.brand{
+  float: left;
+  font-family: calibri;
+  font-size: 22px;
+  color: #fff;
+  padding-left: 15px;
+  max-height: 26.4px;
+}
+
+.close-window{
+  float: right;
+  font-family: calibri;
+  padding-right: 7px;
+  padding-top: 5px;
+}
+
+.close-window a:visited, .close-window a:link , .close-window a{
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.close-window a:hover{
+  color: red;
+}

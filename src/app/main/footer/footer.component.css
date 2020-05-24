@@ -1,0 +1,187 @@
+footer {
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 15px;
+  line-height: 25px;
+  font-weight: 300;
+  background-color: #414042;
+  color: #c6c4c4;
+}
+
+footer .footer-container {
+  padding-top: 20px;
+}
+
+footer div.title {
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width: 991px){
+  footer div.title {
+    margin: 0 -15px;
+    padding: 16px 15px;
+    border-bottom: 1px solid #535355;
+    cursor: pointer;
+  }
+  footer span.title {
+    border-bottom: 0px!important;
+  }
+}
+footer span.title {
+  color: #fff;
+  font-size: 16px;
+  border-bottom: solid 1px #79cbb2;
+  width: 100%;
+  padding: 10px 0;
+  font-weight: 400;
+}
+
+.plus-minus-toggle {
+  cursor: pointer;
+  height: 21px;
+  position: relative;
+  width: 17px;
+}
+
+.plus-minus-toggle:before, .plus-minus-toggle:after {
+  background: #fff;
+  content: '';
+  height: 3px;
+  left: 2px;
+  position: absolute;
+  top: 10px;
+  width: 13px;
+  transition: transform 500ms ease;
+}
+
+.plus-minus-toggle.collapsed:after {
+  transform: rotate(90deg);
+}
+
+.plus-minus-toggle.collapsed:before {
+  transform: rotate(180deg);
+}
+
+.plus-minus-toggle:after {
+  transform-origin: center;
+}
+
+.font-weight-regular {
+  font-weight: 400;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+footer .mobile-expanded-content {
+  display: block;
+}
+
+@media (max-width: 1199px) and (min-width: 1075px){
+  .hidden-md {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 991px){
+  footer .mobile-expanded-content {
+    display: none;
+    margin-top: 15px;
+  }
+}
+
+.pull-right {
+  float: right !important;
+}
+
+footer p, footer li {
+  font-weight: 300;
+  line-height: 25px;
+}
+
+p {
+  margin: 0 0 10px;
+}
+
+p {
+  line-height: 25px;
+  font-weight: 300;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  list-style-type: none;
+}
+
+footer a, footer a:visited, footer a:active {
+  font-size: 14px;
+  font-weight: 300;
+  color: #c6c4c4;
+}
+
+footer a:hover, footer a:focus {
+  color: white;
+  text-decoration: underline;
+}
+
+.socialLinks {
+  margin-bottom: 20px;
+  margin-top: 45px;
+}
+
+.socialLinks li {
+  display: inline-block;
+}
+
+.sprite {
+  background-image: url(https://www.jobtestprep.com/app_images/spritesheet.svg);
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.sprite-facebook {
+  width: 18px;
+  height: 36px;
+  background-position: -187px -5px;
+}
+
+.sprite-linkedin {
+  width: 33px;
+  height: 32px;
+  background-position: -79px -51px;
+}
+
+.sprite-twitter {
+  width: 40px;
+  height: 30px;
+  background-position: -81px -207px;
+}
+
+.sprite-youtube {
+  width: 46px;
+  height: 34px;
+  background-position: -243px -5px;
+}
+
+.footerDivider {
+  border-top: 1px solid #79cbb2;
+  width: 100%;
+  margin: 0;
+  margin-bottom: 50px;
+}
+
+.footerDivider {
+  border-top: 1px solid #79cbb2;
+  width: 100%;
+  margin: 0;
+  margin-bottom: 50px;
+}
+footer .row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

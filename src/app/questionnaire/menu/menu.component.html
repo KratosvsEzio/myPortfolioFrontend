@@ -1,0 +1,52 @@
+<div class="menu">
+  <!-- Warning Text -->
+  <div [@warning]="warningState" *ngIf="warningFlag" class="warning" id="UserWarning">
+    {{warningText}}
+  </div>
+  <div class="cat-btns">
+
+    <!-- Exit Btn -->
+    <div *ngIf="showExitBtn" id="exitBtn" class="btn-li">
+      <a><img src="../../../assets/images/exit.png" (click)="exitFn()"></a>
+    </div>
+
+    <!-- Pause Btn -->
+    <div *ngIf="showPauseBtn" class="btn-li">
+      <a><img src="../../../assets/images/pause.png" (click)="pauseTime()"></a>
+    </div>
+
+    <!-- Hide Time Btn -->
+    <div *ngIf="showTimeBtn" class="btn-li">
+      <a [@fadeToggle]="hideTimeCurrentState"><img src="../../../assets/images/hidetime.png" (click)="hideTimeChangeState()"></a>
+      <a [@fadeToggle]="hideTimeCurrentStateToggle"><img src="../../../assets/images/showtime.png" (click)="hideTimeChangeState()"></a>
+    </div>
+
+    <!-- Mark Btn -->
+    <div *ngIf="showMarkBtn" class="btn-li">
+      <a [@fadeToggle]="markCurrentState"><img src="../../../assets/images/mark.png" (click)="markChangeState()"></a>
+      <a [@fadeToggle]="markCurrentStateToggle"><img src="../../../assets/images/mark_checked.png" (click)="markChangeState()"></a>
+    </div>
+
+    <!-- Review Btn -->
+    <div *ngIf="showReviewBtn" class="btn-li">
+      <a><img src="../../../assets/images/review.png" (click)="reviewFn()"></a>
+    </div>
+
+    <!-- Help Btn -->
+    <div *ngIf="showHelpBtn" class="btn-li">
+      <a><img src="../../../assets/images/help.png" (click)="helpFn()"></a>
+    </div>
+
+    <!-- Confirm Btn -->
+    <div *ngIf="showConfirmBtn" class="btn-li">
+      <a [@fadeToggle]="currentStateToggle"><img src="../../../assets/images/confirm.png" (click)="nextBtnLink()"></a>
+      <a [@fadeToggle]="currentState"><img src="../../../assets/images/confirmed-gray.png" (click)="warningNext()"></a>
+    </div>
+
+    <!-- Next Btn -->
+    <div *ngIf="showNextBtn" class="btn-li">
+      <a [@fadeToggle]="currentState"><img src="../../../assets/images/next.png" (click)="nextBtnLink()"></a>
+      <a [@fadeToggle]="currentStateToggle"><img src="../../../assets/images/next-gray.png" (click)="warningConfirm()"></a>
+    </div>
+  </div>
+</div>

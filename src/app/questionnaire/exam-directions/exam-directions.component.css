@@ -1,0 +1,50 @@
+.main-container{
+  margin: 10px 0;
+  text-align: left;
+}
+.main-block{
+  margin-bottom: 0px;
+  margin-top: 0px;
+  z-index: 2;
+  width: 906px;
+  height: 676px;
+  margin: 0 auto;
+  background-color: #FFF;
+  padding: 3px;
+  -webkit-box-shadow: 0px 0px 10px #818181;
+  -moz-box-shadow: 0px 0px 10px #818181;
+  position: relative;
+  top: -3px;
+  left: -1px;
+  OVERFLOW: auto;
+  overflow-x: hidden;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-right: 15px;
+  text-align: left;
+}
+
+h3{
+  text-align: center;
+  margin-top: 0;
+  padding-right: 15px;
+  padding-left: 15px;
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+p{
+  margin-top: 0;
+  padding-right: 15px;
+  padding-left: 15px;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}

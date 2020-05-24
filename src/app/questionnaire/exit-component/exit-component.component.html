@@ -1,0 +1,32 @@
+
+<div style="margin: 25%;">
+  <p>
+    <b>What would you like to do?</b>
+  </p>
+  <p>&nbsp;</p>
+  <a onclick="return exitsection();" style="text-decoration: none;">
+    <p id="SectionMove" style="display: none; color: white;">
+      <b>I would like to
+        <font color="red">exit this section only</font>
+        and move ahead to the next section.
+      </b>
+    </p>
+  </a>
+  <p>&nbsp;</p>
+  <a (click)="closeWindow()" style="text-decoration: none;">
+    <p style="color: white;">
+      <b>I would like to
+        <font style="cursor: pointer;" color="red">exit completely</font>
+        and resume from this point at a later time.
+      </b>
+    </p>
+  </a>
+  <p>&nbsp;</p>
+  <a (click)="returnToTest()" style="text-decoration: none;">
+    <p style="color: white;">
+      <b>I hit the exit button by mistake. I would like to
+        <font style="cursor: pointer;" color="red">return to where I was</font>.
+      </b>
+    </p>
+  </a>
+</div>

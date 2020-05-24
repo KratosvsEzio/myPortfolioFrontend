@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400;1,700;1,800&display=swap');
+
+/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+:root{
+  font-size: 16px;
+}
+
+body {
+  /* background: #42413C; */
+  /* margin: 0;
+  padding: 0;
+  color: #000; */
+  font-family: 'Times New Roman';
+  /* text-align: center; */
+  font-size: 17px;
+}

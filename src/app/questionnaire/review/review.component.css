@@ -1,0 +1,12 @@
+.selected{
+  background-color: blue;
+  color: white;
+}
+
+thead tr{
+  cursor: context-menu;
+}
+
+tbody tr{
+  cursor: pointer;
+}

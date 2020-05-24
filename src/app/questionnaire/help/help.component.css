@@ -1,0 +1,82 @@
+.main{
+  background: #42413C;
+  margin: 0;
+  padding: 0;
+  color: #000;
+  font-family: 'Times New Roman';
+  text-align: center;
+  font-size: 17px;
+  line-height: normal;
+  position: relative;
+  z-index: 1;
+}
+
+.gre-container{
+  width: 960px;
+  background: #FFF;
+  margin: 0 auto;
+  background-color: #CCC;
+  height: auto;
+  padding-bottom: 10px;
+}
+
+.wrapper{
+  margin: 10px 0;
+}
+
+.content-wrapper{
+  background-color: white;
+  position: relative;
+  top: -3px;
+  left: -1px;
+  OVERFLOW: auto;
+  overflow-x: hidden;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-right: 15px;
+  text-align: left;
+}
+
+.content{
+  height: 682px;
+  min-height: calc(100vh - 2 * (30px));
+  width: 906px;
+  margin: 0 auto;
+  background-color: #FFF;
+  padding: 3px;
+  -webkit-box-shadow: 0px 0px 10px #818181;
+  -moz-box-shadow: 0px 0px 10px #818181;
+}
+
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+h3{
+  text-align: center;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin-top: 0;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+ul{
+  margin-left:30px;
+}
+
+.note span{
+  font-family: "Calibri","sans-serif";;
+}
