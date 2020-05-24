@@ -24,14 +24,9 @@
     "@angular/router": "^7.2.16",
     "@ng-bootstrap/ng-bootstrap": "^5.3.1",
     "angularx-social-login": "^1.2.7",
-<<<<<<< HEAD
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "express": "^4.17.1",
-=======
-    "bootstrap": "^4.5.0",
-    "core-js": "^2.6.11",
->>>>>>> parent of 23a32f1... revert
     "hammerjs": "^2.0.8",
     "isotope-layout": "^3.0.6",
     "jquery": "^3.5.1",
@@ -42,17 +37,10 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-<<<<<<< HEAD
     "@angular-devkit/build-angular": "^0.901.7",
     "@angular/cli": "~7.3.8",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
-=======
-    "@angular-devkit/build-angular": "^0.13.10",
-    "@angular/cli": "^7.3.10",
-    "@angular/compiler-cli": "^7.2.16",
-    "@angular/language-service": "^7.2.16",
->>>>>>> parent of 23a32f1... revert
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
