@@ -27,16 +27,16 @@ import { ServicesComponent } from './Components/services/services.component';
 import { AuthInterceptor } from './Service/auth-interceptor';
 
 // Auth0
-const config = new AuthServiceConfig([
-  {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
-  }
-]);
+// const config = new AuthServiceConfig([
+//   {
+//     id: GoogleLoginProvider.PROVIDER_ID,
+//     provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
+//   }
+// ]);
 
-export function provideConfig() {
-  return config;
-}
+// export function provideConfig() {
+//   return config;
+// }
 
 @NgModule({
   declarations: [
@@ -56,8 +56,7 @@ export function provideConfig() {
   imports: [
     BrowserModule,
     // Auth0 Module
-<<<<<<< HEAD
-    // SocialLoginModule,
+    SocialLoginModule,
     // .initialize(new AuthServiceConfig([
     //     {
     //       id: GoogleLoginProvider.PROVIDER_ID,
@@ -65,10 +64,6 @@ export function provideConfig() {
     //     }
     //   ])
     // ),
-=======
-    SocialLoginModule.initialize(config),
->>>>>>> parent of d8e32dd... removed errors
-    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -82,24 +77,17 @@ export function provideConfig() {
   ],
   providers: [
     // Auth0 provider to all app
-<<<<<<< HEAD
-    // {
-    //   provide: AuthServiceConfig,
-    //   useFactory: () => {
-    //     return new AuthServiceConfig([
-    //       {
-    //         id: GoogleLoginProvider.PROVIDER_ID,
-    //         provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
-    //       }
-    //     ]);
-    //   }
-    // },
-=======
     {
       provide: AuthServiceConfig,
-      useFactory: provideConfig
+      useFactory: () => {
+        return new AuthServiceConfig([
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
+          }
+        ]);
+      }
     },
->>>>>>> parent of d8e32dd... removed errors
     {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
