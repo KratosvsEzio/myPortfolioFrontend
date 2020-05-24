@@ -1,0 +1,22 @@
+<!-- Education Section -->
+<div class="section">
+  <div class="container res-767">
+    <div class="education-section row justify-content-center">
+      <div class="tabs">
+        <div class="tab-item" (click)="tabs(1)" [ngClass]="{'activeTab': activeTab === 1}">Education</div>
+        <div class="tab-item" (click)="tabs(2)" [ngClass]="{'activeTab': activeTab === 2}"*ngIf="false">Experience</div>
+      </div>
+    </div>
+    <div class="tabsData">
+      <ul class="data-items">
+        <li *ngFor="let item of items" class= "data-item">
+          <div class="time wow fadeInLeftElement">{{item.date}}</div>
+          <div class="data-body wow fadeInRightElement">
+            <h4 class="degree">{{item.degree}}</h4>
+            <h5 class="institution">{{item.institution}}</h5>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

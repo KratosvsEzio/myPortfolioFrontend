@@ -1,0 +1,103 @@
+<!-- Contact Us Section -->
+<div class="section">
+  <div class="container">
+    <div class="contact-section">
+      <h3 class="headings text text-center text-lg-left mb-5">Contact</h3>
+      <div class="row">
+        <div class="col-lg-4 mb-4 d-flex justify-content-xs-center justify-content-sm-start">
+          <div class="contact_info">
+            <div class="info_item">
+              <i class="lnr lnr-home"></i>
+              <h6>Lahore, Pakistan</h6>
+              <p>Bahria Town</p>
+            </div>
+            <div class="info_item">
+              <i class="lnr lnr-phone-handset"></i>
+              <h6>+92-303-0491099</h6>
+              <p>Mon to Fri 9am to 6 pm</p>
+            </div>
+            <div class="info_item">
+              <i class="lnr lnr-envelope"></i>
+              <h6>aashirazeem771@gmail.com</h6>
+              <p>Send us your query anytime!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <form class="row" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <div class="col-md-6">
+
+              <!-- Name Input Field -->
+              <mat-form-field appearance="outline">
+                <!-- Input Label -->
+                <mat-label>Enter Name</mat-label>
+                <!-- Input -->
+                <!-- use "[formControl]='formGroupName.get(formControlName)'"  
+                    instead of "formControlName=fromControlName"  -->
+                <input class="input" [formControl]="contactForm.get('name')" type="text" matInput>
+                <!-- Input Errors -->
+                <mat-error *ngIf="!!contactForm.get('name').hasError('required')">
+                  Name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Email Input Field -->
+              <mat-form-field appearance="outline">
+                <!-- Input Label -->
+                <mat-label>Enter Email Address</mat-label>
+                <!-- Input -->
+                <!-- use "[formControl]='formGroupName.get(formControlName)'"  
+                    instead of "formControlName=fromControlName"  -->
+                <input class="input" [formControl]="contactForm.get('email')" type="email" matInput>
+                <!-- Input Errors -->
+                <mat-error *ngIf="!!contactForm.get('email').hasError('email') && !contactForm.get('email').hasError('required')">
+                  Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="!!contactForm.get('email').hasError('required')">
+                  Email is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Subject Input Field -->
+              <mat-form-field appearance="outline">
+                <!-- Input Label -->
+                <mat-label>Enter Subject of Email</mat-label>
+                <!-- Input -->
+                <!-- use "[formControl]='formGroupName.get(formControlName)'"  
+                    instead of "formControlName=fromControlName"  -->
+                <input class="input" [formControl]="contactForm.get('subject')" type="text" matInput>
+                <!-- Input Errors -->
+                <mat-error *ngIf="!!contactForm.get('subject').hasError('required')">
+                  Subject is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+
+              <!-- Message Input Field -->
+              <mat-form-field class="text-area" appearance="outline">
+                <!-- Input Label -->
+                <mat-label>Enter Message</mat-label>
+                <!-- Input -->
+                <!-- use "[formControl]='formGroupName.get(formControlName)'"  instead of "formControlName=fromControlName"  -->
+                <textarea 
+                  class="input" 
+                  [formControl]="contactForm.get('message')" 
+                  type="text" 
+                  matInput>
+                </textarea>
+                <!-- Input Errors -->
+                <mat-error *ngIf="!!contactForm.get('message').hasError('required')">
+                  Message is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12 d-flex justify-content-end">
+              <button [disabled]="!contactForm.valid" class="btn btn-primary" type="submit">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

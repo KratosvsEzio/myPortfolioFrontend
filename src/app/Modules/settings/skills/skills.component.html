@@ -1,0 +1,75 @@
+<form class="row justify-content-center" [formGroup]="skillsForm">
+  <div class="col-md-8 d-flex justify-content-end mb-3">
+    <button class="btn-sm btn-primary" type="button" (click)='createSkill()'>Add New</button>
+  </div>
+
+  <div *ngIf="!isloading && eventCaller === -1" class="col-md-8 d-flex flex-column align-items-center">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="skills; else noItems" class="col-md-8 d-flex flex-column justify-content-center">
+    <div class="mb-3" formArrayName = "listArray" *ngFor="let skill of skills | slice:indexStart:indexEnd ; let i = index">
+      <!-- Card -->
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-spinner class="mr-1" [diameter]="22" *ngIf="!isloading && i=== eventCaller"></mat-spinner>
+            {{skill.skill}}
+          </mat-expansion-panel-header>
+
+          <!-- Skill Name Input Field -->
+          <mat-form-field  class="mt-1" appearance="standard">
+
+            <!-- Input Label -->
+            <mat-label>Enter Skill Name</mat-label>
+
+            <!-- Input -->
+            <!-- use "[formControl]='formGroupName.get(formControlName)'"
+                instead of "formControlName=fromControlName"  -->
+            <input class="input" [formControlName]='i' type="text" matInput>
+          </mat-form-field>
+
+          <div class="btn-group float-right">
+            <button type="button" class="btn-sm btn-primary mr-1" (click)="save(i, skill._id)">Save</button>
+            <button type='button' class="btn-sm btn-warning" (click)='delete(i, skill._id)'>Delete</button>
+          </div>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <!-- Pagination Start -->
+    <nav *ngIf="skills" aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [ngClass]="{'disabled': activePage===1}">
+          <a class="page-link"
+          (click)="prevPage()">
+            <i class="fa fa-angle-left"></i>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item" *ngFor="let item of paginationsPages(skills.length); let i=index">
+          <a class="page-link"
+          [routerLink]="['/settings/skills', i+1]"
+          routerLinkActive="active"
+          (click)="updatePage(i)">
+            {{i+1}}
+          </a>
+        </li>
+        <li class="page-item" [ngClass]="{'disabled': activePage === lastPage }">
+          <a class="page-link"
+          (click)="nextPage()">
+            <i class="fa fa-angle-right"></i>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- Pagination End -->
+  </div>
+  <ng-template #noItems>
+    <div *ngIf="isloading && eventCaller === -1"
+    class="col-md-8 d-flex flex-column justify-content-center text-center">
+      No items found in database
+    </div>
+  </ng-template>
+</form>

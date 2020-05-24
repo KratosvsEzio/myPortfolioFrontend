@@ -1,0 +1,47 @@
+<!-- Profile Section -->
+<div class="section">
+  <div class="container">
+    <div class="profile-section pb-4 mt--300 px-4">
+      <div class="profile-header">
+        <div class="projects-stats">
+          <div class="stats">
+            <h4 class="heading"> Projects </h4>
+            <div class="stat-items">
+              <div class="stat">
+                <div class="stat-count wow fadeIn">{{projects.completedProjects + projects.workingOn}}</div>
+                <div class="stat-type">Total</div>
+              </div>
+              <div class="stat">
+                <div class="stat-count wow fadeIn">{{projects.completedProjects}}</div>
+                <div class="stat-type">Completed</div>
+              </div>
+              <div class="stat">
+                <div class="stat-count wow fadeIn">{{projects.workingOn}}</div>
+                <div class="stat-type">Running</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="profile-img">
+          <div class="position">
+            <div class="img" [ngStyle]="{'background-image': 'url(' + profile.image + ')'}"></div>
+          </div>
+        </div>
+        <div class="btns">
+          <a href={{profile.githubURL}} class="link github"><i class="fab fa-github btn-icon"></i>Github</a>
+          <a href={{profile.cvURL}} class="link contact"><i class="fa fa-cloud-download mr-2"></i>CV</a>
+        </div>
+      </div>
+      <div class="personal-info">
+        <h1 class="name">{{profile.name}}</h1>
+        <h6 class="address">{{profile.address}}</h6>
+        <div appDataToolTip data='Click to Copy' class="email badge badge-primary" >
+          {{profile.email}}
+          <input type="text" id="inputEmail">
+        </div>
+        <h6 class="specialization wow fadeInDown">{{profile.specialization}}</h6>
+        <h6 class="education">{{profile.recentDegree}}</h6>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,183 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  scroll-padding-top: 65px; /* set to the height of your header */
+}
+
+button{
+  border: none;
+  background-color: transparent;
+  outline: none!important;
+}
+
+.headings{
+  padding-bottom: 2rem;
+}
+
+.headings div{
+  display: inline-block;
+  position: relative;
+}
+
+.headings div::after{
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  height: 5px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  background: -webkit-linear-gradient(0deg, #766dff 0%, #88f3ff 100%);
+}
+
+
+
+/* custom Animations */
+
+@keyframes fadeInLeftElement {
+  from {
+    opacity: 0;
+    transform: translate3d(-250px, 0, 0);
+    -webkit-transform: translate3d(-250px, 0, 0);
+    -moz-transform: translate3d(-250px, 0, 0);
+    -ms-transform: translate3d(-250px, 0, 0);
+    -o-transform: translate3d(-250px, 0, 0);
+}
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0px, 0, 0);
+    transform: translate3d(0px, 0, 0);
+    -moz-transform: translate3d(0px, 0, 0);
+    -ms-transform: translate3d(0px, 0, 0);
+    -o-transform: translate3d(0px, 0, 0);
+}
+}
+
+.fadeInLeftElement{
+  animation-delay: .3s;
+  -webkit-animation-name: fadeInLeftElement;
+  animation-name: fadeInLeftElement;
+}
+
+@keyframes fadeInRightElement {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(250px, 0, 0);
+    transform: translate3d(250px, 0, 0);
+    -moz-transform: translate3d(250px, 0, 0);
+    -ms-transform: translate3d(250px, 0, 0);
+    -o-transform: translate3d(250px, 0, 0);
+}
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+}
+}
+
+.fadeInRightElement{
+  animation-delay: .3s;
+  -webkit-animation-name: fadeInRightElement;
+  animation-name: fadeInRightElement;
+}
+
+
+@media (max-width: 991.98px){
+  .nav-link-inner--text::after{
+    display: none!important;
+  }
+  .banner-background {
+    height: 400px!important;
+  }
+  .section-shaped .shape-style-1 span {
+    height: 120px;
+  }
+  .profile-header{
+    flex-direction: column;
+  }
+  .projects-stats{
+    margin-top: 40px;
+    order: 2;
+  }
+  .btns {
+    order: 1;
+    justify-content: space-between;
+  }
+  .personal-info{
+    margin-top: 3rem;
+  }
+}
+
+@media (max-width: 767.98px){
+  .section-shaped .shape-style-1 span {
+    height: 90px;
+  }
+  .btns{
+    padding: 24px 0px;
+  }
+}
+
+@media (max-width: 575.98px){
+  .btns {
+    margin-top: 110px;
+  }
+  .projects-stats{
+    margin-top: 0px;
+  }
+}
+
+@media (min-width: 1200px){
+  html {
+    font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 992px){
+  .projects-stats{
+    flex: 33.33%;
+    max-width: 33.33%;
+    order: 1;
+  }
+  .profile-img{
+    flex: 0 0 25%;
+    max-width: 25%;
+    order: 2;
+  }
+  .btns {
+    flex: 33.33%;
+    max-width: 33.33%;
+    order: 3;
+  }
+  .mt--300 {
+    margin-top: -300px!important;
+  }
+
+  [class*=mb--], [class*=ml--], [class*=mr--], [class*=mt--] {
+    position: relative;
+    z-index: 5;
+  }
+}
+
+@media (min-width: 768px){
+  html {
+    font-size: 1.4rem;
+  }
+}
+
+@media (min-width: 576px){
+  html {
+    font-size: 1.2rem;
+  }
+}

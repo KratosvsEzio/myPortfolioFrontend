@@ -1,0 +1,13 @@
+.mat-form-field {
+  font-size: 0.8rem;
+  margin-bottom: 20px;
+}
+
+textarea{
+  height: 200px;
+  color: #414161;
+  letter-spacing: .01rem;
+  word-spacing: .05rem;
+  line-height: 1.1rem;
+  overflow: hidden;
+}
