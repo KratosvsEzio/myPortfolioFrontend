@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class SendEmailService {
 
-  private emailURL = 'https://my-profile-backend.herokuapp.com/api/sendEmail';
+  private emailURL = 'http://127.0.0.1:4000/api/sendEmail';
 
   constructor(private http: HttpClient) { }
 

@@ -27,24 +27,16 @@ import { ServicesComponent } from './Components/services/services.component';
 import { AuthInterceptor } from './Service/auth-interceptor';
 
 // Auth0
-<<<<<<< HEAD
-// const config = new AuthServiceConfig([
-=======
-// let config = new AuthServiceConfig([
->>>>>>> parent of 23a32f1... revert
-//   {
-//     id: GoogleLoginProvider.PROVIDER_ID,
-//     provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
-//   }
-// ]);
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
+  }
+]);
 
-// export function provideConfig() {
-<<<<<<< HEAD
-//   return config;
-=======
-//   return this.config;
->>>>>>> parent of 23a32f1... revert
-// }
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -63,24 +55,10 @@ import { AuthInterceptor } from './Service/auth-interceptor';
   ],
   imports: [
     BrowserModule,
-
+    
     // Auth0 Module
-<<<<<<< HEAD
     SocialLoginModule,
-=======
-    // SocialLoginModule,
->>>>>>> parent of 23a32f1... revert
-    // .initialize(new AuthServiceConfig([
-    //     {
-    //       id: GoogleLoginProvider.PROVIDER_ID,
-    //       provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
-    //     }
-    //   ])
-    // ),
-<<<<<<< HEAD
-=======
     BrowserAnimationsModule,
->>>>>>> parent of 23a32f1... revert
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -94,31 +72,10 @@ import { AuthInterceptor } from './Service/auth-interceptor';
   ],
   providers: [
     // Auth0 provider to all app
-<<<<<<< HEAD
     {
       provide: AuthServiceConfig,
-      useFactory: () => {
-        return new AuthServiceConfig([
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
-          }
-        ]);
-      }
+      useFactory: provideConfig
     },
-=======
-    // {
-    //   provide: AuthServiceConfig,
-    //   useFactory: () => {
-    //     return new AuthServiceConfig([
-    //       {
-    //         id: GoogleLoginProvider.PROVIDER_ID,
-    //         provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
-    //       }
-    //     ]);
-    //   }
-    // },
->>>>>>> parent of 23a32f1... revert
     {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
