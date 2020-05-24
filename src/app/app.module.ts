@@ -57,7 +57,7 @@ import { AuthInterceptor } from './Service/auth-interceptor';
     BrowserModule,
 
     // Auth0 Module
-    SocialLoginModule,
+    // SocialLoginModule,
     // .initialize(new AuthServiceConfig([
     //     {
     //       id: GoogleLoginProvider.PROVIDER_ID,
@@ -79,17 +79,17 @@ import { AuthInterceptor } from './Service/auth-interceptor';
   ],
   providers: [
     // Auth0 provider to all app
-    {
-      provide: AuthServiceConfig,
-      useFactory: () => {
-        return new AuthServiceConfig([
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
-          }
-        ]);
-      }
-    },
+    // {
+    //   provide: AuthServiceConfig,
+    //   useFactory: () => {
+    //     return new AuthServiceConfig([
+    //       {
+    //         id: GoogleLoginProvider.PROVIDER_ID,
+    //         provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
+    //       }
+    //     ]);
+    //   }
+    // },
     {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
