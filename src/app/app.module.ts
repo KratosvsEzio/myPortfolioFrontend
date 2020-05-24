@@ -27,16 +27,16 @@ import { ServicesComponent } from './Components/services/services.component';
 import { AuthInterceptor } from './Service/auth-interceptor';
 
 // Auth0
-// let config = new AuthServiceConfig([
-//   {
-//     id: GoogleLoginProvider.PROVIDER_ID,
-//     provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
-//   }
-// ]);
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('5126203523-es54glrb2p1rd68vehtc371hf17jcvt9.apps.googleusercontent.com')
+  }
+]);
 
-// export function provideConfig() {
-//   return this.config;
-// }
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -55,8 +55,8 @@ import { AuthInterceptor } from './Service/auth-interceptor';
   ],
   imports: [
     BrowserModule,
-
     // Auth0 Module
+<<<<<<< HEAD
     // SocialLoginModule,
     // .initialize(new AuthServiceConfig([
     //     {
@@ -65,6 +65,9 @@ import { AuthInterceptor } from './Service/auth-interceptor';
     //     }
     //   ])
     // ),
+=======
+    SocialLoginModule.initialize(config),
+>>>>>>> parent of d8e32dd... removed errors
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -79,6 +82,7 @@ import { AuthInterceptor } from './Service/auth-interceptor';
   ],
   providers: [
     // Auth0 provider to all app
+<<<<<<< HEAD
     // {
     //   provide: AuthServiceConfig,
     //   useFactory: () => {
@@ -90,6 +94,12 @@ import { AuthInterceptor } from './Service/auth-interceptor';
     //     ]);
     //   }
     // },
+=======
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    },
+>>>>>>> parent of d8e32dd... removed errors
     {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
