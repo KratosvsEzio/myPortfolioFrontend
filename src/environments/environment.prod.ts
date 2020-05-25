@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  name: '',
+  apiBaseUrl: 'https://my-profile-backend.herokuapp.com'
 };

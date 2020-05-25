@@ -5,6 +5,7 @@ import { educationData } from '../Models/education.modal';
 import { portfolioData } from '../Models/portfolioData.model';
 import { profileData } from '../Models/profile.model';
 import { Subject, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,14 @@ export class UserService {
 
   private updatedUser = new Subject<user>();
 
-  private fetchUserURL = 'https://my-profile-backend.herokuapp.com/api/user';
-  private profileURL = 'https://my-profile-backend.herokuapp.com/api/profile';
-  private profileImageURL = 'https://my-profile-backend.herokuapp.com/api/profileImage';
-  private aboutMeURL = 'https://my-profile-backend.herokuapp.com/api/about';
-  private skillURL = 'https://my-profile-backend.herokuapp.com/api/skill';
-  private educationURL = 'https://my-profile-backend.herokuapp.com/api/education';
-  private portfolioURL = 'https://my-profile-backend.herokuapp.com/api/portfolio';
+  private environmentApiBaseUrl = environment.apiBaseUrl;
+  private fetchUserURL = this.environmentApiBaseUrl + '/api/user';
+  private profileURL = this.environmentApiBaseUrl + '/api/profile';
+  private profileImageURL = this.environmentApiBaseUrl + '/api/profileImage';
+  private aboutMeURL = this.environmentApiBaseUrl + '/api/about';
+  private skillURL = this.environmentApiBaseUrl + '/api/skill';
+  private educationURL = this.environmentApiBaseUrl + '/api/education';
+  private portfolioURL = this.environmentApiBaseUrl + '/api/portfolio';
 
   constructor(private http: HttpClient) { }
 

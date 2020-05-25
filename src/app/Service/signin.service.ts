@@ -3,13 +3,15 @@ import { AuthService, GoogleLoginProvider, SocialUser  } from 'angularx-social-l
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SigninService implements OnInit {
 
-  private loginURL = 'https://my-profile-backend.herokuapp.com/api/login';
+  private environmentApiBaseUrl = environment.apiBaseUrl;
+  private loginURL = this.environmentApiBaseUrl + '/api/login';
 
   private user: SocialUser;
   private tokenTimer: any;
