@@ -15,8 +15,8 @@ export class ContactComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private _sendEmailService: SendEmailService,
-    private _snackBar: MatSnackBar
+    private sendEmailService: SendEmailService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -45,9 +45,9 @@ export class ContactComponent implements OnInit {
     };
 
     // send form data to service
-    this._sendEmailService.sendEmail(formData).subscribe( (response) => {
+    this.sendEmailService.sendEmail(formData).subscribe( (response) => {
       if (response.status) {
-        this._snackBar.open(response.message, 'Dismiss' , {
+        this.snackBar.open(response.message, 'Dismiss' , {
           duration: 3 * 1000,
         });
       }

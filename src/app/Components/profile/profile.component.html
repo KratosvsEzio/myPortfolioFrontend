@@ -1,7 +1,7 @@
 <!-- Profile Section -->
 <div class="section">
   <div class="container">
-    <div class="profile-section pb-4 mt--300 px-4">
+    <div class="profile-section pb-4 mt--300 px-4 px-sm-2">
       <div class="profile-header">
         <div class="projects-stats">
           <div class="stats">
@@ -17,7 +17,7 @@
               </div>
               <div class="stat">
                 <div class="stat-count wow fadeIn">{{projects.workingOn}}</div>
-                <div class="stat-type">Running</div>
+                <div class="stat-type">Working On</div>
               </div>
             </div>
           </div>
@@ -29,7 +29,15 @@
         </div>
         <div class="btns">
           <a href={{profile.githubURL}} class="link github"><i class="fab fa-github btn-icon"></i>Github</a>
-          <a href={{profile.cvURL}} class="link contact"><i class="fa fa-cloud-download mr-2"></i>CV</a>
+          <a
+            href="../../../assets/pdf/Resume(Aashir Azeem)(Front-End).pdf"
+            class="link contact"
+            type="application/pdf"
+            width="100%"
+            height="100%"
+          >
+            <i class="fa fa-cloud-download mr-2"></i>CV
+          </a>
         </div>
       </div>
       <div class="personal-info">

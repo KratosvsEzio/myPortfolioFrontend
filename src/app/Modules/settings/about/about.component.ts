@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/Service/user.service';
 import { user } from 'src/app/Models/user.model';
 import { MatSnackBar } from '@angular/material';
+import { UserDataService } from 'src/app/Service/user-data.service';
 
 @Component({
   selector: 'app-about',
@@ -12,26 +13,31 @@ import { MatSnackBar } from '@angular/material';
 export class AboutComponent implements OnInit {
 
   aboutForm: FormGroup;
-  user: user;
-  // tslint:disable-next-line: variable-name
-  constructor(private formBuilder: FormBuilder, private _userService: UserService, private _snackBar: MatSnackBar) { }
+  projects: {completedProjects: number, workingOn: number};
+  aboutMe: string;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private userDataService: UserDataService,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
     this.aboutForm = this.formBuilder.group({
-      completedProjects: '0',
-      workingOn: '0',
-      aboutMe: '',
+      completedProjects: ['0', [Validators.required]],
+      workingOn: ['0', [Validators.required]],
+      aboutMe: ['', [Validators.required]],
     });
 
-    this._userService.getUser().subscribe( (response: user) => {
-      this.user = response;
-      console.log(this.user);
+    this.userDataService.currentUpdatedUser.subscribe( (response: user) => {
+      this.projects = response.projects;
+      this.aboutMe = response.aboutMe;
+      // console.log(this.user);
 
-      this.aboutForm = this.formBuilder.group({
-        completedProjects: [this.user.projects.completedProjects , [Validators.required]],
-        workingOn: [this.user.projects.workingOn, [Validators.required]],
-        aboutMe: [this.user.aboutMe, [Validators.required]],
-      });
+      this.f.completedProjects.setValue(this.projects.completedProjects);
+      this.f.workingOn.setValue(this.projects.workingOn);
+      this.f.aboutMe.setValue(this.aboutMe);
     });
   }
 
@@ -53,14 +59,6 @@ export class AboutComponent implements OnInit {
     };
 
     // send form data to service
-    this._userService.updateAboutMe(formData)
-    .subscribe( (response) => {
-      if (response.status) {
-        this._userService.fetchUser();
-        this._snackBar.open(response.message, 'Dismiss' , {
-          duration: 3 * 1000,
-        });
-      }
-    });
+    this.userService.updateAboutMe(formData);
   }
 }

@@ -4,6 +4,8 @@ import { UserService } from 'src/app/Service/user.service.js';
 import { user } from '../../../Models/user.model';
 import { profileData } from '../../../Models/profile.model';
 import { MatSnackBar } from '@angular/material';
+import { distinctUntilChanged, finalize } from 'rxjs/operators';
+import { UserDataService } from 'src/app/Service/user-data.service';
 
 @Component({
   selector: 'app-profile',
@@ -26,32 +28,37 @@ export class ProfileComponent implements OnInit {
   previewImage: string | ArrayBuffer = '../../../../assets/images/defaultUser.jpg';
 
   // tslint:disable-next-line: variable-name
-  constructor(private formBuilder: FormBuilder, private _userService: UserService, private _snackBar: MatSnackBar) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private userDataService: UserDataService
+  ) { }
 
   ngOnInit() {
     this.profileForm = this.formBuilder.group({
-      name: '',
-      email: '',
-      address: '',
-      specialization: '',
-      recentDegree: '',
-      githubURL: '',
-      cvURL: '',
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      specialization: ['', [Validators.required]],
+      recentDegree: ['', [Validators.required]],
+      githubURL: ['', [Validators.required]],
+      cvURL: ['', [Validators.required]],
     });
 
-    this._userService.getUser().subscribe( (response: user) => {
-      this.profile = response.profile;
+    // this.userService.fetchUser();
+
+    this.userDataService.currentUpdatedUser.pipe(distinctUntilChanged()).subscribe( (response: user) => {
+      // console.log('inside profile settings get user', response);
+      this.profile = {...response.profile};
       this.previewImage = response.profile.image;
 
-      this.profileForm = this.formBuilder.group({
-        name: [this.profile.name, [Validators.required]],
-        email: [this.profile.email, [Validators.required]],
-        address: [this.profile.address, [Validators.required]],
-        specialization: [this.profile.specialization, [Validators.required]],
-        recentDegree: [this.profile.recentDegree, [Validators.required]],
-        githubURL: [this.profile.githubURL, [Validators.required]],
-        cvURL: [this.profile.cvURL, [Validators.required]],
-      });
+      this.f.name.setValue(this.profile.name);
+      this.f.email.setValue(this.profile.email);
+      this.f.address.setValue(this.profile.address);
+      this.f.specialization.setValue(this.profile.specialization);
+      this.f.recentDegree.setValue(this.profile.recentDegree);
+      this.f.githubURL.setValue(this.profile.githubURL);
+      this.f.cvURL.setValue(this.profile.cvURL);
     });
   }
 
@@ -80,15 +87,7 @@ export class ProfileComponent implements OnInit {
     };
 
     // send form data to service
-    this._userService.updateProfile(formData)
-    .subscribe( (response) => {
-      if (response.status) {
-        this._userService.fetchUser();
-        this._snackBar.open(response.message, 'Dismiss' , {
-          duration: 3 * 1000,
-        });
-      }
-    });
+    this.userService.updateProfile(formData);
   }
 
   // change profile image
@@ -105,15 +104,7 @@ export class ProfileComponent implements OnInit {
     reader.readAsDataURL(img);
 
     // upload image
-    this._userService.updateUserImage(img)
-    .subscribe( (response) => {
-      if (response.status) {
-        this._userService.fetchUser();
-        this._snackBar.open(response.message, 'Dismiss' , {
-          duration: 3 * 1000,
-        });
-      }
-    });
+    this.userService.updateUserImage(img);
   }
 
 }

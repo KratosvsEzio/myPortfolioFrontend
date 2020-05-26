@@ -1,24 +1,40 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AuthService, GoogleLoginProvider, SocialUser  } from 'angularx-social-login';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { shareReplay, take, takeUntil } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SigninService implements OnInit {
-
+export class SigninService {
   private environmentApiBaseUrl = environment.apiBaseUrl;
   private loginURL = this.environmentApiBaseUrl + '/api/login';
 
   private user: SocialUser;
   private tokenTimer: any;
-  private auth = new BehaviorSubject(false);
+  private auth = new BehaviorSubject<boolean>(false);
 
-  constructor(private router: Router, private http: HttpClient, private authService: AuthService) {
-    this.authService.authState.subscribe((user) => {
+  constructor(private router: Router, private http: HttpClient, private authService: AuthService) {}
+
+  getIsAuth(): Observable<boolean> {
+    return this.auth.asObservable();
+  }
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    // console.log('signin with google');
+    this.setOAuthToken();
+  }
+
+  setOAuthToken() {
+    this.authService.authState.pipe(
+      shareReplay(),
+      take(1)
+    )
+    .subscribe((user) => {
       if (user) {
         this.user = user;
         // console.log(user.idToken);
@@ -28,38 +44,23 @@ export class SigninService implements OnInit {
     });
   }
 
-  ngOnInit() {
-
-  }
-
-  private setTokenId(tokenId: string) {
-    sessionStorage.setItem('tokenId', tokenId);
-  }
-
-  getTokenId() {
-    return sessionStorage.getItem('tokenId');
-  }
-
   authentication() {
-    this.http.get<{status: boolean, message: string, expiresIn: number}>(this.loginURL).subscribe( (res) => {
+    this.http.get<{status: boolean, message: string, expiresIn: number}>(this.loginURL).pipe(
+      shareReplay()
+    )
+    .subscribe( (res) => {
       if (res.status) {
         console.log(res.message);
         this.auth.next(res.status);
-        this.auth.subscribe( (res1) => {
-          console.log('inside', res1);
-        });
-        const now = new Date();
-        const expirationDate = new Date (now.getTime() + res.expiresIn * 1000);
+        const expirationDate = new Date (new Date().getTime() + res.expiresIn * 1000);
         this.saveAuth(this.user.authToken, expirationDate);
       }
     });
   }
 
-  getIsAuth(): Observable<boolean> {
-    this.auth.subscribe( (res) => {
-      console.log('get', res);
-    });
-    return this.auth;
+  private saveAuth(token: string, exp: Date) {
+    sessionStorage.setItem('token', token);
+    sessionStorage.setItem('exp', exp.toISOString());
   }
 
   autoAuth() {
@@ -76,18 +77,6 @@ export class SigninService implements OnInit {
     }
   }
 
-  private setAuthTimer(duration: number) {
-    console.log('set Timer Duration' , duration);
-    this.tokenTimer = setTimeout(() => {
-      this.signOut();
-    }, duration * 1000);
-  }
-
-  private saveAuth(token: string, exp: Date) {
-    sessionStorage.setItem('token', token);
-    sessionStorage.setItem('exp', exp.toISOString());
-  }
-
   private getAuth() {
     const token = sessionStorage.getItem('token');
     const exp = sessionStorage.getItem('exp');
@@ -100,13 +89,24 @@ export class SigninService implements OnInit {
     };
   }
 
+  private setAuthTimer(duration: number) {
+    console.log('set Timer Duration' , duration);
+    this.tokenTimer = setTimeout(() => {
+      this.signOut();
+    }, duration * 1000);
+  }
+
+  private setTokenId(tokenId: string) {
+    sessionStorage.setItem('tokenId', tokenId);
+  }
+
+  getTokenId() {
+    return sessionStorage.getItem('tokenId');
+  }
+
   private clearAuth() {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('exp');
-  }
-
-  signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
   signOut(): void {

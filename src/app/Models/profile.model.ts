@@ -1,3 +1,4 @@
+// tslint:disable-next-line: class-name
 export interface profileData {
   name: string;
   image: string;

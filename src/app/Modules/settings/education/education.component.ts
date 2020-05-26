@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@ang
 import { educationData } from '../../../Models/education.modal';
 import { UserService } from '../../../Service/user.service';
 import { MatSnackBar } from '@angular/material';
+import { UserDataService } from 'src/app/Service/user-data.service';
 
 @Component({
   selector: 'app-education',
@@ -16,7 +17,12 @@ export class EducationComponent implements OnInit {
   isloading = false;
   eventCaller = -1;
   // tslint:disable-next-line: variable-name
-  constructor(private formBuilder: FormBuilder, private _userService: UserService, private _snackBar: MatSnackBar) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private userDataService: UserDataService,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
 
@@ -24,7 +30,7 @@ export class EducationComponent implements OnInit {
       listArray: this.formBuilder.array([])
     });
 
-    this._userService.getUser().subscribe((response) => {
+    this.userDataService.currentUpdatedUser.subscribe((response) => {
       if (response.portfolio) {
         this.isloading = true;
         this.educations = [...response.education];
@@ -59,60 +65,36 @@ export class EducationComponent implements OnInit {
     this.educations.unshift({_id: '', date: '', degree: 'New Degree', institution: ''});
   }
 
-  save(id: number, _formGroup: FormGroup) {
-    this.isloading = true;
-    const newEd = _formGroup;
+  save(id: number, formGroup: FormGroup) {
+    // this.isloading = true;
+    const newEd = formGroup;
     const ed = this.educations[id];
     this.eventCaller = id;
 
     if ( ed._id !== '' ) {
       // Call Api for Edit Education
-      this._userService.editEducation({
+      this.userService.editEducation({
         _id: ed._id,
         date: newEd.controls.date.value,
         degree: newEd.controls.degree.value,
         institution: newEd.controls.institution.value
-      }).subscribe( (response) => {
-        this.isloading = false;
-        if (response.status) {
-          this._userService.fetchUser();
-          this._snackBar.open(response.message, 'Dismiss' , {
-            duration: 3 * 1000,
-          });
-        }
       });
 
     } else {
       // Call Api for New Education
-      this._userService.newEducation({
+      this.userService.newEducation({
         _id: '',
         date: newEd.controls.date.value,
         degree: newEd.controls.degree.value,
         institution: newEd.controls.institution.value
-      }).subscribe( (response) => {
-        this.isloading = false;
-        if (response.status) {
-          this._userService.fetchUser();
-          this._snackBar.open(response.message, 'Dismiss' , {
-            duration: 3 * 1000,
-          });
-        }
       });
     }
   }
 
   delete(id: number) {
     this.eventCaller = id;
-    this.isloading = true;
-    this._userService.deleteEducation(this.educations[id]._id).subscribe( (response) => {
-      if (response.status) {
-        this.isloading = false;
-        this._userService.fetchUser();
-        this._snackBar.open(response.message, 'Dismiss' , {
-          duration: 3 * 1000,
-        });
-      }
-    });
+    // this.isloading = true;
+    this.userService.deleteEducation(this.educations[id]._id);
   }
 
 }

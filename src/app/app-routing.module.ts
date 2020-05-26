@@ -6,8 +6,11 @@ import { PortfoliopageComponent } from './Pages/portfoliopage/portfoliopage.comp
 import { ContactpageComponent } from './Pages/contactpage/contactpage.component';
 import { PermissionComponent } from './Components/permission/permission.component';
 import { AuthGuardGuard } from './Service/auth-guard.guard';
+import { UserService } from './Service/user.service';
+
 
 const routes: Routes = [
+  { path: 'home', component: ProfilepageComponent, },
   { path: 'profile', component: ProfilepageComponent, },
   { path: 'profile/alijinnah19', component: PermissionComponent},
   { path: 'portfolio', component: PortfoliopageComponent},
@@ -20,7 +23,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  // providers: [AuthGuardGuard, UserService]
 })
 
 export class AppRoutingModule { }

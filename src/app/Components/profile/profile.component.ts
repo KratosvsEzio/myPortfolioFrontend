@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/Service/user.service.js';
-import { user } from '../../Models/user.model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { UserService } from '../../Service/user.service';
 import { profileData } from '../../Models/profile.model';
+import { UserDataService } from 'src/app/Service/user-data.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,23 +10,15 @@ import { profileData } from '../../Models/profile.model';
 })
 export class ProfileComponent implements OnInit {
 
-  projects: {completedProjects: number; workingOn: number} = { completedProjects: 0, workingOn: 0};
-  profile: profileData = {
-    name: '',
-    image: '../../../assets/images/defaultUser.jpg',
-    address: '',
-    email: '',
-    specialization: '',
-    recentDegree: '',
-    githubURL: '',
-    cvURL: ''
-  };
+  projects: {completedProjects: number; workingOn: number};
+  profile: profileData;
 
-  // tslint:disable-next-line: variable-name
-  constructor(private _userService: UserService) {}
+  constructor( private userDataService: UserDataService) {}
 
   ngOnInit() {
-    this._userService.getUser().subscribe( (response: user) => {
+    // this.userService.fetchUser()
+    this.userDataService.currentUpdatedUser.subscribe( (response) => {
+      // console.log('Inside Profile Page Get User', response);
       this.projects = response.projects;
       this.profile = response.profile;
     });

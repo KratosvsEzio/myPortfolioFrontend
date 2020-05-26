@@ -19,7 +19,12 @@
     justify-content: flex-start;
   }
   .time{
-    padding: 0;
+    position: absolute;
+    padding-left: 0!important;
+    top: 10px;
+  }
+  .institution{
+    padding-top: 10px;
   }
 }
 

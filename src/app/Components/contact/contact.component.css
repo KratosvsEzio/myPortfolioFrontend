@@ -20,9 +20,29 @@
 
 /* Section Heading */
 
-.headings{
+.main-headings{
   font-weight: 700;
   text-transform: uppercase;
+}
+
+.main-headings div{
+  display: inline-block;
+  position: relative;
+}
+
+.main-headings div::after{
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  height: 5px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  background: -webkit-linear-gradient(0deg, #766dff 0%, #88f3ff 100%);
 }
 
 /* Contact Info */
@@ -81,4 +101,20 @@ textarea{
 
 .form-valid{
   opacity: 0.8;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn{
+  animation-delay: .3s;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
 }

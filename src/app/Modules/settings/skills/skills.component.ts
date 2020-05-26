@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/Service/user.service.js';
 import { user } from '../../../Models/user.model';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { filter } from 'rxjs/operators';
+import { UserDataService } from '../../../Service/user-data.service';
 
 @Component({
   selector: 'app-skills',
@@ -28,8 +30,9 @@ export class SkillsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private _userService: UserService,
-    private _snackBar: MatSnackBar) { }
+    private userDataService: UserDataService,
+    private userService: UserService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
@@ -38,7 +41,7 @@ export class SkillsComponent implements OnInit {
       ])
     });
 
-    this._userService.getUser().subscribe( (response: user) => {
+    this.userDataService.currentUpdatedUser.subscribe( (response: user) => {
       if (response.portfolio) {
         this.isloading = true;
         this.skills = [...response.skills];
@@ -49,11 +52,22 @@ export class SkillsComponent implements OnInit {
       while (this.listArray.length !== 0) {
         this.listArray.removeAt(0);
       }
-      for (const skill of response.skills) {
+      this.fillSkillInForm(response.skills);
+
+      this.router.events.pipe( filter(event => event instanceof NavigationEnd) ).subscribe(() => {
+        this.fillSkillInForm(response.skills);
+      });
+    });
+
+  }
+
+  fillSkillInForm(skills: { skill: string; }[]) {
+    skills.forEach((skill: { skill: string; }, index: number) => {
+      if (index >= this.indexStart && index < this.indexEnd) {
+        console.log('inside filter', skill);
         this.listArray.push(new FormControl(skill.skill, [Validators.required]));
       }
     });
-
   }
 
   get listArray() { return this.skillsForm.get('listArray') as FormArray; }
@@ -66,7 +80,7 @@ export class SkillsComponent implements OnInit {
   }
 
   save(id: number, skillId: string) {
-    this.isloading = true;
+    // this.isloading = true;
     this.eventCaller = id;
     const s = this.skills.filter( (item) => {
       if ( skillId !== '' && item._id === skillId ) {
@@ -76,41 +90,17 @@ export class SkillsComponent implements OnInit {
 
     if ( s.length !== 0 ) {
       // Call Api for Edit Skill
-      this._userService.editSkill({_id: skillId, skill: this.f.listArray.value[id]}).subscribe( (response) => {
-        if (response.status) {
-          this.isloading = false;
-          this._userService.fetchUser();
-          this._snackBar.open(response.message, 'Dismiss' , {
-            duration: 3 * 1000,
-          });
-        }
-      });
+      this.userService.editSkill({_id: skillId, skill: this.f.listArray.value[id]});
     } else {
       // Call Api for New Skill
-      this._userService.newSkill(this.f.listArray.value[id]).subscribe( (response) => {
-        if (response.status) {
-          this.isloading = false;
-          this._userService.fetchUser();
-          this._snackBar.open(response.message, 'Dismiss' , {
-            duration: 3 * 1000,
-          });
-        }
-      });
+      this.userService.newSkill(this.f.listArray.value[id]);
     }
   }
 
   delete(id: number, skillId: string) {
-    this.isloading = true;
+    // this.isloading = true;
     this.eventCaller = id;
-    this._userService.deleteSkill(skillId).subscribe( (response) => {
-      if (response.status) {
-        this.isloading = false;
-        this._userService.fetchUser();
-        this._snackBar.open(response.message, 'Dismiss' , {
-          duration: 3 * 1000,
-        });
-      }
-    });
+    this.userService.deleteSkill(skillId);
   }
 
   paginationsPages(length: number) {

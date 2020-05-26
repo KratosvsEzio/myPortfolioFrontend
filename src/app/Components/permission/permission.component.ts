@@ -15,9 +15,8 @@ export class PermissionComponent implements OnInit {
   constructor(private route: Router, private _signinService: SigninService) { }
 
   ngOnInit() {
-    this._signinService.ngOnInit();
 
-    this._signinService.getIsAuth().subscribe((response) => {
+    this._signinService.getIsAuth().subscribe((response: boolean) => {
       this.isAuth = response;
       console.log(response);
       if (this.isAuth === true) {

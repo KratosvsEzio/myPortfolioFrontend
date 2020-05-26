@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../Service/user.service';
 import { educationData } from '../../Models/education.modal';
 import { user } from '../../Models/user.model';
+import { UserDataService } from 'src/app/Service/user-data.service';
 
 @Component({
   selector: 'app-education',
@@ -14,11 +15,11 @@ export class EducationComponent implements OnInit {
   items: educationData[];
 
   // tslint:disable-next-line: variable-name
-  constructor(private _userService: UserService) {
+  constructor( private userDataService: UserDataService) {
   }
 
   ngOnInit() {
-    this._userService.getUser().subscribe( (response: user) => {
+    this.userDataService.currentUpdatedUser.subscribe( (response: user) => {
       this.items = response.education;
     });
   }

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { portfolioData } from 'src/app/Models/portfolioData.model';
 import { UserService } from 'src/app/Service/user.service';
 import { MatSnackBar } from '@angular/material';
+import { UserDataService } from 'src/app/Service/user-data.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -16,7 +17,12 @@ export class PortfolioComponent implements OnInit {
   isloading = false;
   eventCaller = -1;
   // tslint:disable-next-line: variable-name
-  constructor(private formBuilder: FormBuilder, private _userService: UserService, private _snackBar: MatSnackBar) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private userDataService: UserDataService,
+    private snackBar: MatSnackBar
+    ) { }
 
   ngOnInit() {
 
@@ -24,7 +30,7 @@ export class PortfolioComponent implements OnInit {
       listArray: this.formBuilder.array([])
     });
 
-    this._userService.getUser().subscribe((response) => {
+    this.userDataService.currentUpdatedUser.subscribe((response) => {
       if (response.portfolio) {
         this.isloading = true;
         this.portfolios = [...response.portfolio];
@@ -74,64 +80,40 @@ export class PortfolioComponent implements OnInit {
       gitURL: ''});
   }
 
-  save(id: number, _formGroup: FormGroup) {
-    this.isloading = true;
+  save(id: number, formGroup: FormGroup) {
+    // this.isloading = true;
     this.eventCaller = id;
-    const newP = _formGroup;
+    const newP = formGroup;
     const p = this.portfolios[id];
 
     if ( p._id !== '' ) {
       // Call Api for Edit Portfolio
-      this._userService.editPortfolio({
+      this.userService.editPortfolio({
         _id: p._id,
         img: newP.controls.img.value,
         name: newP.controls.name.value,
         category: newP.controls.category.value,
         demoURL: newP.controls.demoURL.value,
         gitURL: newP.controls.gitURL.value
-      }).subscribe( (response) => {
-        this.isloading = false;
-        if (response.status) {
-          this._userService.fetchUser();
-          this._snackBar.open(response.message, 'Dismiss' , {
-            duration: 3 * 1000,
-          });
-        }
       });
 
     } else {
       // Call Api for New Portfolio
-      this._userService.newPortfolio({
+      this.userService.newPortfolio({
         _id: '',
         img: newP.controls.img.value,
         name: newP.controls.name.value,
         category: newP.controls.category.value,
         demoURL: newP.controls.demoURL.value,
         gitURL: newP.controls.gitURL.value
-      }).subscribe( (response) => {
-        this.isloading = false;
-        if (response.status) {
-          this._userService.fetchUser();
-          this._snackBar.open(response.message, 'Dismiss' , {
-            duration: 3 * 1000,
-          });
-        }
       });
     }
   }
 
   delete(id: number) {
-    this.isloading = true;
+    // this.isloading = true;
     this.eventCaller = id;
-    this._userService.deletePortfolio(this.portfolios[id]._id).subscribe( (response) => {
-      if (response.status) {
-        this.isloading = false;
-        this._userService.fetchUser();
-        this._snackBar.open(response.message, 'Dismiss' , {
-          duration: 3 * 1000,
-        });
-      }
-    });
+    this.userService.deletePortfolio(this.portfolios[id]._id);
   }
 
 }

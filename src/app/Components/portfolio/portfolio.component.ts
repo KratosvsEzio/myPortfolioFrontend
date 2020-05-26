@@ -1,10 +1,13 @@
-import { Component, OnInit, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
 import { UserService } from '../../Service/user.service';
 import { portfolioData } from '../../Models/portfolioData.model';
 import { user } from '../../Models/user.model';
 import * as $ from 'jquery';
 import * as jQueryBridget from 'jquery-bridget';
 import * as Isotope from 'isotope-layout';
+import { Observable, pipe } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { UserDataService } from 'src/app/Service/user-data.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -12,28 +15,9 @@ import * as Isotope from 'isotope-layout';
   styleUrls: ['./portfolio.component.css']
 })
 export class PortfolioComponent implements OnInit, AfterViewChecked {
+  itemsObservable: Observable<portfolioData[]>;
 
-  items: portfolioData[] = [
-    {
-      _id: '',
-      img: '../../../assets/images/defaultUser.jpg',
-      name: '',
-      category: '',
-      demoURL: '',
-      gitURL: '',
-    },
-    {
-      _id: '',
-      img: '../../../assets/images/defaultUser.jpg',
-      name: '',
-      category: '',
-      demoURL: '',
-      gitURL: '',
-    },
-  ];
-
-  // tslint:disable-next-line: variable-name
-  constructor(private _userService: UserService) {
+  constructor(private userDataService: UserDataService) {
   }
 
   ngAfterViewChecked( ) {
@@ -41,11 +25,13 @@ export class PortfolioComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
-
     // Fetch Data of portfolio from api
-    this._userService.getUser().subscribe( (response: user) => {
-      this.items = response.portfolio;
-    });
+
+    this.itemsObservable = this.userDataService.currentUpdatedUser.pipe(
+      map( (data: user) => {
+        return data.portfolio;
+      })
+    );
 
     // JQuery
     jQueryBridget( 'isotope', Isotope, $ );

@@ -28,9 +28,10 @@
 }
 
 .wel_item {
-  border: 1px solid #eeeeee;
+  border: 1.725px solid #eeeeee;
   padding: 20px 20px;
   border-radius: 5px;
+  cursor: default;
 }
 
 .wel_item h4 {
@@ -42,8 +43,8 @@
 }
 
 .wel_item p {
-  font-size: .8rem;
-  font-weight: 600;
+  font-size: .825rem;
+  font-weight: 800;
   margin-bottom: 0px;
   background: -webkit-linear-gradient(0deg, #766dff 0%, #88f3ff 100%);
   -webkit-background-clip: text;
@@ -147,4 +148,25 @@
   animation-delay: .3s;
   -webkit-animation-name: fadeInText;
   animation-name: fadeInText;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+    transition: ease-in-out;
+    -webkit-transition: ease-in-out;
+    -moz-transition: ease-in-out;
+    -ms-transition: ease-in-out;
+    -o-transition: ease-in-out;
+}
+}
+
+.fadeIn{
+  animation-delay: .6s;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
 }

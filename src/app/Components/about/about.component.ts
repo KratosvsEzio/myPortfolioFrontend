@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../Service/user.service';
 import { user } from '../../Models/user.model';
+import { UserDataService } from 'src/app/Service/user-data.service';
 
 @Component({
   selector: 'app-about',
@@ -12,27 +13,20 @@ export class AboutComponent implements OnInit {
   skillSet1: {skill: string}[] = [];
   skillSet2: {skill: string}[] = [];
   aboutMe: string;
-  projects: {
-    completedProjects: number;
-    workingOn: number;
-  } = {
+  projects: { completedProjects: number; workingOn: number } = {
     completedProjects: 0,
     workingOn: 0,
   };
 
   // tslint:disable-next-line: variable-name
-  constructor(private _userService: UserService) {
+  constructor(private userDataService: UserDataService) {
   }
 
   ngOnInit() {
-    this._userService.getUser().subscribe( (response: user) => {
+    this.userDataService.currentUpdatedUser.subscribe( (response: user) => {
       this.aboutMe = response.aboutMe;
       this.projects = response.projects;
-      for (let i = 0;
-          i < response.skillCount
-          && this.skillSet1.length <= (response.skillCount / 2)
-          && this.skillSet2.length <= (response.skillCount / 2);
-          i++) {
+      for (let i = 0; this.loopCondition(i, response); i++) {
         if (i < (response.skillCount / 2) && this.skillSet1.length < (response.skillCount / 2)) {
           this.skillSet1.push(response.skills[i]);
         } else if ( i >= (response.skillCount / 2) && this.skillSet2.length < (response.skillCount / 2)) {
@@ -40,5 +34,10 @@ export class AboutComponent implements OnInit {
         }
       }
     });
+  }
+
+  loopCondition(i: number, response) {
+    return i < response.skillCount && this.skillSet1.length <= (response.skillCount / 2)
+    && this.skillSet2.length <= (response.skillCount / 2);
   }
 }

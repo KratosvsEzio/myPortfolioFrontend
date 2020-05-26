@@ -1,4 +1,5 @@
 /* Section */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 
 .section {
   position: relative;
@@ -41,7 +42,7 @@
 /* Stats Section */
 
 .projects-stats{
-  padding: 24px 29px;
+  padding: 24px 19px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,10 +51,12 @@
 .stats{
   display: flex;
   flex-direction: column;
+  cursor: default;
 }
 
 .heading{
   text-align: center;
+  font-weight: 700;
   margin-bottom: 0px;
 }
 
@@ -69,7 +72,7 @@
   justify-content: center;
   align-items: center;
   margin-right: 1rem;
-  padding: .875rem;
+  padding: .875rem 0rem;
   text-align: center;
 }
 
@@ -184,12 +187,15 @@ i{
 
 .name{
   text-transform: capitalize;
+  font-family: 'Dancing Script', cursive;
   background: url('https://media.giphy.com/media/xUPGcw99Tl8SCEDGKI/giphy.gif');
   background-size: cover;
   background-position: center;
   -webkit-background-clip: text;
+  margin-bottom: .65rem;
   color: transparent;
-  font-weight: 600;
+  font-size: 3rem;
+  /* font-weight: 600; */
 }
 
 .address{
