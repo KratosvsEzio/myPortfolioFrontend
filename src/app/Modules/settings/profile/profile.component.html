@@ -1,23 +1,46 @@
 <form class="row justify-content-center" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <div class="col-md-4 d-flex flex-column align-items-center mb-3">
 
-    <!-- User image display -->
-    <div class="temp-img-display mb-3">
-      <div *ngIf="previewImage">
-        <img
-        class="temp-img"
-        (click)="imagePicker.click()"
-        src="{{previewImage}}">
-      </div>
-    </div>
+    <div class="row">
 
-    <!-- Input That takes image which is not displayed -->
-      <input
-        type="file"
-        (change)="onImagePick($event)"
-        accept="image/gif,image/jpeg,image/jpg,image/png"
-        style="display: none;"
-        #imagePicker>
+      <!-- Image Preview Row -->
+      <div class="col-12 d-flex justify-content-center">
+        <!-- User image display -->
+        <div class="temp-img-display mb-3">
+          <div *ngIf="previewImage">
+            <img
+            class="temp-img"
+            (click)="imagePicker.click()"
+            src="{{previewImage}}">
+          </div>
+        </div>
+
+        <!-- Input That takes image which is not displayed -->
+        <input
+          type="file"
+          (change)="onImagePick($event)"
+          accept="image/gif,image/jpeg,image/jpg,image/png"
+          style="display: none;"
+          #imagePicker
+        >
+      </div>
+
+      <!-- CV Preview Row -->
+      <div class="col-12">
+
+        <label><strong>Upload CV</strong></label>
+        <!-- Input That takes CV which is not displayed -->
+        <input
+          type="file"
+          (change)="onCVPick($event)"
+          accept=".pdf"
+          class="btn btn-primary w-100"
+          style="display: block;"
+          #CVPicker
+        >
+      </div>
+
+    </div>
   </div>
 
   <div class="col-md-8 d-flex flex-column justify-content-center">
@@ -110,18 +133,8 @@
     </mat-form-field>
 
     <!-- CV URL Input Field -->
-    <mat-form-field appearance="outline">
-      <!-- Input Label -->
-      <mat-label>Enter CV URL</mat-label>
-      <!-- Input -->
-      <!-- use "[formControl]='formGroupName.get(formControlName)'"
-          instead of "formControlName=fromControlName"  -->
-      <input class="input" [formControl]="profileForm.get('cvURL')" type="text" matInput>
-      <!-- Input Errors -->
-      <mat-error *ngIf="!!profileForm.get('cvURL').hasError('required')">
-        CV URL is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+
+    <!-- Submit Button -->
     <div class="row">
       <div class="col-md-12 d-flex justify-content-end">
         <button [disabled]="!profileForm.valid" class="btn btn-primary" type="submit">Send</button>

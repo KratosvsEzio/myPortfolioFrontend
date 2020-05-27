@@ -4,7 +4,6 @@ import { user } from '../Models/user.model';
 import { educationData } from '../Models/education.modal';
 import { portfolioData } from '../Models/portfolioData.model';
 import { profileData } from '../Models/profile.model';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { shareReplay, tap, share, distinctUntilChanged, finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
@@ -15,35 +14,11 @@ import { UserDataService } from './user-data.service';
 })
 export class UserService {
 
-  private updatedUser = new BehaviorSubject<user>({
-    profile: {
-      name: '',
-      image: '../../../assets/images/defaultUser.jpg',
-      address: '',
-      email: '',
-      specialization: '',
-      recentDegree: '',
-      githubURL: '',
-      cvURL: '',
-    },
-    aboutMe: '',
-    projects: {
-      completedProjects: 0,
-      workingOn: 0
-    },
-    education: [],
-    portfolio: [],
-    skills: [],
-    skillCount: 0
-  });
-  currentUpdatedUser = this.updatedUser.asObservable();
-
-  // private updatedUser = new BehaviorSubject<any>({});
-
   private environmentApiBaseUrl = environment.apiBaseUrl;
   private fetchUserURL = this.environmentApiBaseUrl + '/api/user';
   private profileURL = this.environmentApiBaseUrl + '/api/profile';
   private profileImageURL = this.environmentApiBaseUrl + '/api/profileImage';
+  private profileCvURL = this.environmentApiBaseUrl + '/api/CV';
   private aboutMeURL = this.environmentApiBaseUrl + '/api/about';
   private skillURL = this.environmentApiBaseUrl + '/api/skill';
   private educationURL = this.environmentApiBaseUrl + '/api/education';
@@ -82,10 +57,20 @@ export class UserService {
     });
   }
 
+  // Update User Image in database
   updateUserImage(image: File) {
     const formData = new FormData();
     formData.append('image', image);
     return this.http.post<{message: string, status: boolean}>(this.profileImageURL, formData).subscribe( (response) => {
+      this.updateMessage(response);
+    });
+  }
+
+  // Update User CV in database
+  updateUserCV(CV: File) {
+    const formData = new FormData();
+    formData.append('cv', CV);
+    return this.http.post<{message: string, status: boolean}>(this.profileCvURL, formData).subscribe( (response) => {
       this.updateMessage(response);
     });
   }

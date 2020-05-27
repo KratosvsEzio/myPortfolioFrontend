@@ -25,7 +25,9 @@ export class ProfileComponent implements OnInit {
     githubURL: '',
     cvURL: ''
   };
+
   previewImage: string | ArrayBuffer = '../../../../assets/images/defaultUser.jpg';
+  previewCV: string | ArrayBuffer = '../../../../assets/pdf/Resume(Aashir Azeem)(Front-End).pdf';
 
   // tslint:disable-next-line: variable-name
   constructor(
@@ -42,7 +44,7 @@ export class ProfileComponent implements OnInit {
       specialization: ['', [Validators.required]],
       recentDegree: ['', [Validators.required]],
       githubURL: ['', [Validators.required]],
-      cvURL: ['', [Validators.required]],
+      // cvURL: ['', [Validators.required]],
     });
 
     // this.userService.fetchUser();
@@ -58,7 +60,7 @@ export class ProfileComponent implements OnInit {
       this.f.specialization.setValue(this.profile.specialization);
       this.f.recentDegree.setValue(this.profile.recentDegree);
       this.f.githubURL.setValue(this.profile.githubURL);
-      this.f.cvURL.setValue(this.profile.cvURL);
+      // this.f.cvURL.setValue(this.profile.cvURL);
     });
   }
 
@@ -83,7 +85,7 @@ export class ProfileComponent implements OnInit {
       specialization: this.f.specialization.value,
       recentDegree: this.f.recentDegree.value,
       githubURL: this.f.githubURL.value,
-      cvURL: this.f.cvURL.value,
+      cvURL: this.profile.cvURL,
     };
 
     // send form data to service
@@ -105,6 +107,24 @@ export class ProfileComponent implements OnInit {
 
     // upload image
     this.userService.updateUserImage(img);
+  }
+
+  // change profile CV
+  onCVPick(event: Event) {
+    if ((event.target as HTMLInputElement).files.length === 0) {
+      return;
+    }
+    // show CV preview
+    const reader = new FileReader();
+    const CV = (event.target as HTMLInputElement).files[0];
+    console.log(CV);
+    reader.onload = () => {
+      this.previewCV = reader.result;
+    };
+    reader.readAsDataURL(CV);
+
+    // upload image
+    this.userService.updateUserCV(CV);
   }
 
 }
