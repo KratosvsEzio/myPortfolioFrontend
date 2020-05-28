@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/Service/user.service.js';
 import { user } from '../../../Models/user.model';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { filter } from 'rxjs/operators';
 import { UserDataService } from '../../../Service/user-data.service';
@@ -32,9 +32,14 @@ export class SkillsComponent implements OnInit {
     private router: Router,
     private userDataService: UserDataService,
     private userService: UserService,
-    private snackBar: MatSnackBar) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+    // this.route.params.subscribe( (page) => {
+    //   this.updatePage(page.pageNumber);
+    //   // pageIndex = page.pageNumber;
+    // });
 
     this.skillsForm = this.formBuilder.group({
       listArray: this.formBuilder.array([
@@ -48,26 +53,29 @@ export class SkillsComponent implements OnInit {
         this.skillCount = response.skillCount;
       }
 
-      // dynamically create inputs
-      while (this.listArray.length !== 0) {
-        this.listArray.removeAt(0);
-      }
-      this.fillSkillInForm(response.skills);
+      this.route.params.subscribe( (page) => {
+        this.updatePage(page.pageNumber);
 
-      this.router.events.pipe( filter(event => event instanceof NavigationEnd) ).subscribe(() => {
+        // Remove Previous controls in List Array create inputs
+        while (this.listArray.length !== 0) {
+          this.listArray.removeAt(0);
+        }
+
         this.fillSkillInForm(response.skills);
       });
     });
 
   }
 
+  // Fill New Array List in the Skill Form Whenever page changes
   fillSkillInForm(skills: { skill: string; }[]) {
     skills.forEach((skill: { skill: string; }, index: number) => {
       if (index >= this.indexStart && index < this.indexEnd) {
-        console.log('inside filter', skill);
+        // console.log('inside filter', skill);
         this.listArray.push(new FormControl(skill.skill, [Validators.required]));
       }
     });
+    // console.log(this.listArray.value)
   }
 
   get listArray() { return this.skillsForm.get('listArray') as FormArray; }
@@ -103,15 +111,15 @@ export class SkillsComponent implements OnInit {
     this.userService.deleteSkill(skillId);
   }
 
-  paginationsPages(length: number) {
+  paginationPages(length: number) {
     this.lastPage = Math.ceil(length / 5);
     return new Array(Math.ceil(length / 5));
   }
 
   updatePage(pageIndex: number) {
-    this.indexStart = pageIndex * 5;
+    this.indexStart = (pageIndex - 1) * 5;
     this.indexEnd = this.indexStart + 5;
-    this.activePage = pageIndex + 1;
+    this.activePage = (pageIndex - 1) + 1;
   }
 
   nextPage() {

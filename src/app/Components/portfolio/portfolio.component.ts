@@ -8,6 +8,8 @@ import * as Isotope from 'isotope-layout';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserDataService } from 'src/app/Service/user-data.service';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { ProjectDialogComponent } from '../project-dialog/project-dialog.component';
 
 @Component({
   selector: 'app-portfolio',
@@ -17,7 +19,7 @@ import { UserDataService } from 'src/app/Service/user-data.service';
 export class PortfolioComponent implements OnInit, AfterViewChecked {
   itemsObservable: Observable<portfolioData[]>;
 
-  constructor(private userDataService: UserDataService) {
+  constructor(private userDataService: UserDataService, private dialog: MatDialog) {
   }
 
   ngAfterViewChecked( ) {
@@ -51,4 +53,15 @@ export class PortfolioComponent implements OnInit, AfterViewChecked {
       return false;
     });
   }
+
+  openDialog(project: portfolioData) {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = project;
+
+    this.dialog.open(ProjectDialogComponent, dialogConfig);
+}
 }

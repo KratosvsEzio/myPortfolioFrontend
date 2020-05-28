@@ -11,6 +11,9 @@ import { EducationComponent } from './Components/education/education.component';
 import { PortfolioComponent } from './Components/portfolio/portfolio.component';
 import { ContactComponent } from './Components/contact/contact.component';
 import { AppRoutingModule, routingComponent} from './app-routing.module';
+import { ProjectDialogComponent } from './Components/project-dialog/project-dialog.component';
+import { HomeComponent } from './Components/home/home.component';
+import { ServicesComponent } from './Components/services/services.component';
 
 // Directives
 import { DataToolTipDirective } from './Directives/data-tool-tip.directive';
@@ -18,11 +21,9 @@ import { DataToolTipDirective } from './Directives/data-tool-tip.directive';
 // Modules
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule, MatInputModule, MatButtonModule, MatSnackBarModule  } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatButtonModule, MatSnackBarModule, MatDialogModule  } from '@angular/material';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
-import { HomeComponent } from './Components/home/home.component';
-import { ServicesComponent } from './Components/services/services.component';
 import { AuthInterceptor } from './Service/auth-interceptor';
 
 // Auth0
@@ -51,10 +52,11 @@ export function provideConfig() {
     ContactComponent,
     HomeComponent,
     ServicesComponent,
+    ProjectDialogComponent,
   ],
   imports: [
     BrowserModule,
-
+    MatDialogModule,
     // Auth0 Module
     SocialLoginModule,
     // .initialize(config),
@@ -82,6 +84,7 @@ export function provideConfig() {
     multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ProjectDialogComponent]
 })
 export class AppModule { }
