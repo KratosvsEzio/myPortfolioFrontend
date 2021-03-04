@@ -27,6 +27,8 @@ const routes: Routes = [
       { path: 'portfolio', component: PortfoliopageComponent},
       { path: 'about', component: AboutpageComponent},
       { path: 'contact', component: ContactpageComponent},
+      { path: '', redirectTo: '/profile', pathMatch: 'full'},
+      { path: '**', redirectTo: '/profile', pathMatch: 'full'},
     ]
   }
 ];

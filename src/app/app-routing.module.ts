@@ -4,10 +4,8 @@ import { AuthGuardGuard } from './Service/auth-guard.guard';
 
 
 const routes: Routes = [
-  { path: '', loadChildren: './Modules/default/default.module#DefaultModule'},
   { path: 'settings', loadChildren: './Modules/settings/settings.module#SettingsModule', canActivate: [AuthGuardGuard] },
-  { path: '', redirectTo: '/profile', pathMatch: 'full'},
-  { path: '**', redirectTo: '/profile', pathMatch: 'full'},
+  { path: '', loadChildren: './Modules/default/default.module#DefaultModule'},
 ];
 
 @NgModule({
