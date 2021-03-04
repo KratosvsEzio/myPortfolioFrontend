@@ -117,6 +117,7 @@ export class ProfileComponent implements OnInit {
     // show CV preview
     const reader = new FileReader();
     const CV = (event.target as HTMLInputElement).files[0];
+    
     console.log(CV);
     reader.onload = () => {
       this.previewCV = reader.result;

@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{project.name}}</h2>
+<!-- <h2 mat-dialog-title>{{project.name}}</h2>
 
 <mat-dialog-content>
 
@@ -7,6 +7,147 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button class="mat-raised-button"(click)="close()">Close</button>
-    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
-</mat-dialog-actions>
+  <button class="mat-raised-button"(click)="close()">Close</button>
+  <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+</mat-dialog-actions> -->
+
+<div class="custom-dialog-section p-4">
+  <div class="project-top d-md-flex">
+
+    <!-- Project Image -->
+    <div class="project-poster d-flex flex-column">
+      <div class="flex-fill mb-3">
+        <a [href]="project.img" target="_blank">
+          <img [src]="project.img" class="img-fluid rounded image-size" alt="{{project.name | ucwords}} Image" >
+        </a>
+      </div>
+
+      <!-- Actions -->
+      <div class="project-action d-flex order-0">
+        <!-- <button class="btn btn-secondary btn" (click)="close()">Close</button> -->
+        <ul class="nav nav-pills nav-pills-circle mb-3">
+          <li class="nav-item flex-fill">
+            <a class="btn btn-primary btn-round"
+              [href]="project.gitURL"
+              target="_blank"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Github Link"
+              data-container="body"
+              data-animation="true"
+            >
+              <span class="d-block">
+                <img width="24" height="24" src="assets/icons/github.svg" alt="github link icon">
+              </span>
+            </a>
+          </li>
+          <li class="nav-item flex-fill">
+            <a class="btn btn-primary btn-round"
+              [href]="project.demoURL"
+              target="_blank"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Website Link"
+              data-container="body"
+              data-animation="true"
+            >
+              <span class="d-block">
+                <img width="24" height="24" src="assets/icons/web.svg" alt="git link icon">
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="project-info pl-md-3 d-flex flex-column">
+
+      <!-- Project Title -->
+      <h1 class="project-title p-name order-1">
+        <a href="#">
+          <h2 class="h2">{{project.name | ucwords}}</h2>
+        </a>
+      </h1>
+
+      <!-- Description -->
+      <div class="project-pg order-2">
+        <p class="h5">Project Description</p>
+      </div>
+
+      <!-- Project Description List -->
+      <ul class="order-3">
+        <li *ngIf="project.description.frontend.length">
+          <label>Front-End:</label>
+          <span *ngFor="let frontend of project.description.frontend">
+            <a [href]="frontend.url" target="_blank" [title]="frontend.url" class="badge badge-pill badge-primary mx-1">
+              <img *ngIf="frontend.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+frontend.icon+'.svg'" [alt]="frontend.icon+' icon'">
+              {{frontend.name | titlecase}}
+            </a>
+          </span>
+        </li>
+
+        <li *ngIf="project.description.backend.length">
+          <label>Back-End:</label>
+          <span *ngFor="let backend of project.description.backend">
+            <a [href]="backend.url" target="_blank" [title]="backend.url" class="badge badge-pill badge-primary mx-1">
+              <img *ngIf="backend.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+backend.icon+'.svg'" [alt]="backend.icon+' icon'">
+              {{backend.name | titlecase}}
+            </a>
+          </span>
+        </li>
+
+        <li *ngIf="project.description.framework.length">
+          <label>Frameworks:</label>
+          <span *ngFor="let framework of project.description.framework">
+            <a [href]="framework.url" target="_blank" [title]="framework.url" class="badge badge-pill badge-primary mx-1">
+              <img *ngIf="framework.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+framework.icon+'.svg'" [alt]="framework.icon+' icon'">
+              {{framework.name | titlecase}}
+            </a>
+          </span>
+        </li>
+
+        <li *ngIf="project.description.database.length">
+          <label>Database:</label>
+          <span *ngFor="let database of project.description.database">
+            <a [href]="database.url" target="_blank" [title]="database.url" class="badge badge-pill badge-primary mx-1">
+              <img *ngIf="database.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+database.icon+'.svg'" [alt]="database.icon+' icon'">
+              {{database.name | titlecase}}
+            </a>
+          </span>
+        </li>
+
+        <li *ngIf="project.description.library.length">
+          <label>Plugin:</label>
+          <span *ngFor="let library of project.description.library">
+            <a [href]="library.url" target="_blank" [title]="library.url" class="badge badge-pill badge-primary mx-1">
+              <img *ngIf="library.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+library.icon+'.svg'" [alt]="library.icon+' icon'">
+              {{library.name | titlecase}}
+            </a>
+          </span>
+        </li>
+
+        <li *ngIf="project.description.font.length">
+          <label>Fonts:</label>
+          <span *ngFor="let font of project.description.font">
+            <a [href]="font.url" target="_blank" [title]="font.url" class="badge badge-pill badge-primary mx-1">
+              <img *ngIf="font.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+font.icon+'.svg'" [alt]="font.icon+' icon'">
+              {{font.name | titlecase}}
+            </a>
+          </span>
+        </li>
+
+        <li *ngIf="project.description.icon.length">
+          <label>Icons:</label>
+          <span *ngFor="let icon of project.description.icon">
+            <a [href]="icon.url" target="_blank" [title]="icon.url" class="badge badge-pill badge-primary mx-1">
+              <img *ngIf="icon.icon !== ''" width="16" height="16" [src]="'assets/icons/'+icon.icon+'.svg'" [alt]="icon.icon+' icon'">
+              {{icon.name | titlecase}}
+            </a>
+          </span>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</div>

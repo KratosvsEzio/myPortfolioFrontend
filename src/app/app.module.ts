@@ -3,17 +3,11 @@ import { NgModule } from '@angular/core';
 
 // Components
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './Components/header/header.component';
-import { BannerComponent } from './Components/banner/banner.component';
-import { ProfileComponent } from './Components/profile/profile.component';
-import { AboutComponent } from './Components/about/about.component';
-import { EducationComponent } from './Components/education/education.component';
-import { PortfolioComponent } from './Components/portfolio/portfolio.component';
-import { ContactComponent } from './Components/contact/contact.component';
-import { AppRoutingModule, routingComponent} from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { ProjectDialogComponent } from './Components/project-dialog/project-dialog.component';
-import { HomeComponent } from './Components/home/home.component';
 import { ServicesComponent } from './Components/services/services.component';
+import { HeaderComponent } from 'src/app/Components/header/header.component';
+import { BannerComponent } from 'src/app/Components/banner/banner.component';
 
 // Directives
 import { DataToolTipDirective } from './Directives/data-tool-tip.directive';
@@ -21,10 +15,11 @@ import { DataToolTipDirective } from './Directives/data-tool-tip.directive';
 // Modules
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule, MatInputModule, MatButtonModule, MatSnackBarModule, MatDialogModule  } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatButtonModule, MatSnackBarModule, MatDialogModule } from '@angular/material';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 import { AuthInterceptor } from './Service/auth-interceptor';
+import { NgPipesModule } from 'ngx-pipes';
 
 // Auth0
 const config = new AuthServiceConfig([
@@ -41,25 +36,18 @@ export function provideConfig() {
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    BannerComponent,
-    ProfileComponent,
     DataToolTipDirective,
-    AboutComponent,
-    EducationComponent,
-    PortfolioComponent,
-    routingComponent,
-    ContactComponent,
-    HomeComponent,
     ServicesComponent,
     ProjectDialogComponent,
+    HeaderComponent,
+    BannerComponent,
   ],
   imports: [
     BrowserModule,
     MatDialogModule,
     // Auth0 Module
-    SocialLoginModule,
-    // .initialize(config),
+    // SocialLoginModule,
+    SocialLoginModule.initialize(config),
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -71,6 +59,7 @@ export function provideConfig() {
       MatSnackBarModule
     ],
     AppRoutingModule,
+    NgPipesModule,
   ],
   providers: [
     // Auth0 provider to all app

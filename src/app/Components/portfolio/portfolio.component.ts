@@ -1,11 +1,10 @@
-import { Component, OnInit, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
-import { UserService } from '../../Service/user.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { portfolioData } from '../../Models/portfolioData.model';
 import { user } from '../../Models/user.model';
 import * as $ from 'jquery';
 import * as jQueryBridget from 'jquery-bridget';
 import * as Isotope from 'isotope-layout';
-import { Observable, pipe } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserDataService } from 'src/app/Service/user-data.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
@@ -16,52 +15,77 @@ import { ProjectDialogComponent } from '../project-dialog/project-dialog.compone
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css']
 })
-export class PortfolioComponent implements OnInit, AfterViewChecked {
+export class PortfolioComponent implements OnInit, OnDestroy {
   itemsObservable: Observable<portfolioData[]>;
+  categoriesObservable: Observable<string[]>
+  categories = [];
 
   constructor(private userDataService: UserDataService, private dialog: MatDialog) {
   }
 
-  ngAfterViewChecked( ) {
-    $('.portfolio-item > div').addClass( 'col-lg-4 col-md-4 col-8 item mb-5' );
+  ngOnDestroy() {
+    // this.itemsObservable
+  }
+
+  projectThumbnailName(project) {
+    return `../../../assets/images/${project.category}.png`;
   }
 
   ngOnInit() {
-    // Fetch Data of portfolio from api
 
+    // Fetch Data of portfolio from api
     this.itemsObservable = this.userDataService.currentUpdatedUser.pipe(
       map( (data: user) => {
+        this.categories = data.portfolio.map( item => item.category);
         return data.portfolio;
       })
     );
 
+    // Fetch Data of categories from api
+    this.categoriesObservable = this.userDataService.currentUpdatedUser.pipe(
+      map( (data: user) => {
+        return this.categories = data.portfolio.map( item => item.category);
+      })
+    );
+
     // JQuery
+    this.jqueryInitialize();
+  }
+
+  filter(event: any) {
+    console.log(event.target)
+    const item = event.target;
+    $('.portfolio-menu ul li').removeClass('active');
+    item.classList.add("active");
+    console.log('Heelo', item.getAttribute("data-filter"))
+    const selector = item.getAttribute("data-filter");
+    $('.portfolio-item').isotope({
+      filter: selector
+    });
+  }
+
+  // Initialize Isotope with jquery
+  jqueryInitialize() {
+
+    // Bridging between Isotope.js and Jquery.js
     jQueryBridget( 'isotope', Isotope, $ );
     $('.portfolio-item').isotope({
       itemSelector: '.item',
       layoutMode: 'fitRows'
     });
 
-    $('.portfolio-menu ul li').click( function() {
-      $('.portfolio-menu ul li').removeClass('active');
-      $(this).addClass('active');
-
-      const selector = $(this).attr('data-filter');
-      $('.portfolio-item').isotope({
-        filter: selector
-      });
-      return false;
-    });
   }
 
+  // Open Modal box when project is clicked on
   openDialog(project: portfolioData) {
 
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
+    // dialogConfig.disableClose = true;
+    dialogConfig.panelClass = 'custom-modalbox';
+    dialogConfig.autoFocus = false;
     dialogConfig.data = project;
 
     this.dialog.open(ProjectDialogComponent, dialogConfig);
-}
+  }
 }

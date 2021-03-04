@@ -1,9 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { portfolioData } from 'src/app/Models/portfolioData.model';
 import { UserService } from 'src/app/Service/user.service';
-import { MatSnackBar } from '@angular/material';
+import { MatDialogConfig, MatDialog } from '@angular/material';
 import { UserDataService } from 'src/app/Service/user-data.service';
+import { ProjectDialogComponent } from 'src/app/Components/project-dialog/project-dialog.component';
+import { MatChipInputEvent } from '@angular/material/chips';
+
+export interface Description {
+  frontend: {
+    name: string,
+    url: string,
+    icon: string
+  }[],
+  backend: {
+    name: string,
+    url: string,
+    icon: string
+  }[],
+  framework: {
+    name: string,
+    url: string,
+    icon: string
+  }[],
+  library: {
+    name: string,
+    url: string,
+    icon: string
+  }[],
+  database: {
+    name: string,
+    url: string,
+    icon: string
+  }[],
+  font: {
+    name: string,
+    url: string,
+    icon: string
+  }[],
+  icon: {
+    name: string,
+    url: string,
+    icon: string
+  }[],
+};
 
 @Component({
   selector: 'app-portfolio',
@@ -12,17 +53,34 @@ import { UserDataService } from 'src/app/Service/user-data.service';
 })
 export class PortfolioComponent implements OnInit {
 
-  portfolioForm: FormGroup;
-  portfolios: portfolioData[];
-  isloading = false;
-  eventCaller = -1;
-  // tslint:disable-next-line: variable-name
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private userDataService: UserDataService,
-    private snackBar: MatSnackBar
-    ) { }
+    private dialog: MatDialog
+  ) { }
+
+  portfolioForm: FormGroup;
+  portfolios: portfolioData[];
+  isloading = false;
+  eventCaller = -1;
+
+
+  get f() { return this.portfolioForm.controls; }
+  get listArray() { return this.f.listArray as FormArray; }
+
+
+  // --------------------------Mat chip Properties---------------------------------------------//
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  description: Description[] | any =  [];
+
+  remove(item: any, key: string): void {
+    this.description[key] = this.description[key].filter(frontend => frontend.name !== item.name );
+  }
 
   ngOnInit() {
 
@@ -32,6 +90,7 @@ export class PortfolioComponent implements OnInit {
 
     this.userDataService.currentUpdatedUser.subscribe((response) => {
       if (response.portfolio) {
+        this.description = [];
         this.isloading = true;
         this.portfolios = [...response.portfolio];
       }
@@ -41,75 +100,161 @@ export class PortfolioComponent implements OnInit {
       while (this.listArray.length !== 0) {
         this.listArray.removeAt(0);
       }
-      this.portfolios.forEach( (p) => {
+
+      this.portfolios.forEach( (p, i) => {
         this.listArray.push( this.createItem(p) );
+        this.description.push({
+          frontend: [],
+          backend: [],
+          framework: [],
+          library: [],
+          database: [],
+          font: [],
+          icon: []
+        });
+
+        p.description.frontend.forEach(element => this.addNewItem(i, 'frontend', element));
+        p.description.backend.forEach(element => this.addNewItem(i, 'backend', element));
+        p.description.framework.forEach(element => this.addNewItem(i, 'framework', element));
+        p.description.library.forEach(element => this.addNewItem(i, 'library', element));
+        p.description.database.forEach(element => this.addNewItem(i, 'database', element));
+        p.description.font.forEach(element => this.addNewItem(i, 'font', element));
+        p.description.icon.forEach(element => this.addNewItem(i, 'icon', element));
       });
     });
-
   }
 
-  createItem(p: portfolioData): FormGroup {
+
+  // --------------------------Create Forms---------------------------------------------//
+  createItem(p: any): FormGroup {
     return this.formBuilder.group({
       img: [p.img, [Validators.required]],
       name: [p.name, [Validators.required]],
       category: [p.category, [Validators.required]],
       demoURL: [p.demoURL, [Validators.required]],
       gitURL: [p.gitURL, [Validators.required]],
+      frontend: this.createNewForm(),
+      backend: this.createNewForm(),
+      framework: this.createNewForm(),
+      library: this.createNewForm(),
+      database: this.createNewForm(),
+      font: this.createNewForm(),
+      icon: this.createNewForm(),
     });
   }
 
-  get listArray() { return this.portfolioForm.get('listArray') as FormArray; }
+  createNewForm(): FormGroup {
+    return this.formBuilder.group({
+      name: [''],
+      url: [''],
+      icon: [''],
+    });
+  }
 
-  get f() { return this.portfolioForm.controls; }
+  // --------------------------Add Description items---------------------------------------------//
 
-  createPortfolio() {
+  addNewItem(listArrayIndex: number, key: string, value: any = null) {
+    // console.log('add new item', listArrayIndex, key, value, this.description);
+    if(!value) {
+      this.description[listArrayIndex][key].unshift({
+        name: this.listArray.controls[listArrayIndex].get(key).get('name').value,
+        url: this.listArray.controls[listArrayIndex].get(key).get('url').value,
+        icon: this.listArray.controls[listArrayIndex].get(key).get('icon').value,
+      });
+      this.listArray.controls[listArrayIndex].get(key).reset();
+
+    } else{
+      this.description.push({});
+      this.description[listArrayIndex][key].unshift({
+        name: value.name,
+        url: value.url,
+        icon: value.icon,
+      });
+    }
+  }
+
+  // --------------------------Open Modal box when project is clicked on---------------------------------------------//
+  openDialog(project: portfolioData) {
+
+    const dialogConfig = new MatDialogConfig();
+
+    // dialogConfig.disableClose = true;
+    dialogConfig.panelClass = 'custom-modalbox';
+    dialogConfig.autoFocus = false;
+    dialogConfig.data = project;
+
+    this.dialog.open(ProjectDialogComponent, dialogConfig);
+  }
+
+  // ---------------------------Populate List array----------------------------------------------------------------- //
+  populateListArray() {
+
     this.listArray.insert(0, this.createItem({
       _id: '',
       img: '',
       name: 'New Item',
       category: '',
       demoURL: '',
-      gitURL: ''})
-    );
+      gitURL: '',
+    }));
+    this.description.push({
+      frontend: [],
+      backend: [],
+      framework: [],
+      library: [],
+      database: [],
+      font: [],
+      icon: []
+    });
+  }
+
+  // ---------------------------Populate Portfolio Variable--------------------------------------------------------- //
+  populatePortfolio() {
     this.portfolios.unshift({
       _id: '',
       img: '',
       name: 'New Item',
       category: '',
       demoURL: '',
-      gitURL: ''});
+      gitURL: '',
+      description: {
+        frontend: [],
+        backend: [],
+        framework: [],
+        database: [],
+        library: [],
+        font: [],
+        icon: [],
+      }
+    });
   }
 
+  // ---------------------------Action performed when Add New Button is pressed------------------------------------- //
+  createPortfolio() {
+    this.populateListArray();
+    this.populatePortfolio();
+  }
+
+  // ---------------------------Action performed when Save button is pressed---------------------------------------- //
   save(id: number, formGroup: FormGroup) {
     // this.isloading = true;
     this.eventCaller = id;
-    const newP = formGroup;
     const p = this.portfolios[id];
+    const newProject = {
+      _id: p._id || '',
+      img: formGroup.controls.img.value,
+      name: formGroup.controls.name.value,
+      category: formGroup.controls.category.value,
+      demoURL: formGroup.controls.demoURL.value,
+      gitURL: formGroup.controls.gitURL.value,
+      description: this.description[id],
+    };
 
-    if ( p._id !== '' ) {
-      // Call Api for Edit Portfolio
-      this.userService.editPortfolio({
-        _id: p._id,
-        img: newP.controls.img.value,
-        name: newP.controls.name.value,
-        category: newP.controls.category.value,
-        demoURL: newP.controls.demoURL.value,
-        gitURL: newP.controls.gitURL.value
-      });
-
-    } else {
-      // Call Api for New Portfolio
-      this.userService.newPortfolio({
-        _id: '',
-        img: newP.controls.img.value,
-        name: newP.controls.name.value,
-        category: newP.controls.category.value,
-        demoURL: newP.controls.demoURL.value,
-        gitURL: newP.controls.gitURL.value
-      });
-    }
+    // Call Api for Edit Portfolio
+    this.userService.editPortfolio(newProject);
   }
 
+  // ---------------------------Action performed when delete button is pressed-------------------------------------- //
   delete(id: number) {
     // this.isloading = true;
     this.eventCaller = id;

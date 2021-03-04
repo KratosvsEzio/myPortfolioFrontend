@@ -11,8 +11,8 @@ export class SettingsComponent implements OnInit {
   constructor( private userService: UserService ) { }
 
   ngOnInit() {
-    // console.log('Fetch User has been called from Settings');
-    // this.userService.fetchUser();
+    console.log('Fetch User has been called from Settings');
+    this.userService.fetchUser();
   }
 
 }

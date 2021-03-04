@@ -1,0 +1,47 @@
+.custom-dialog-section{
+  /* overflow-y: scroll; */
+  width: 60vw;
+}
+
+.image-size{
+  max-width: 350px;
+  min-width: 240px;
+  max-height: 380px;
+  height: 100%;
+  object-fit: contain;
+}
+
+.badge {
+  font-size: 55%;
+  margin-bottom: 6px;
+}
+
+label{
+  font-weight: 600;
+  font-size: 70%;
+}
+
+ul{
+  list-style: none;
+  padding-inline-start: 0;
+  width: 100%;
+}
+
+svg{
+  width: 18px;
+  height: 18px;
+}
+
+li > a {
+  width: 100%;
+  padding: 3px;
+}
+
+a > img{
+  vertical-align: sub;
+}
+
+.btn svg{
+  width: 26px;
+  height: 26px;
+}

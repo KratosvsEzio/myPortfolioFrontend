@@ -1,25 +1,27 @@
 <!-- Portfolio Section -->
 <div class="section">
-  <div class="container">
+  <div *ngIf="itemsObservable | async" class="container">
     <h3 class="headings text text-center"><div class="wow fadeInLeftElement">Portfolio</div></h3>
     <p class='description'>Check out some of my Latest work</p>
     <div class="portfolio-menu">
       <ul>
-        <li class="active" data-filter="*">All</li>
-        <li data-filter=".angular">Angular</li>
-        <li data-filter=".mean">MEAN Stack</li>
+        <li (click)="filter(this.$event)" class="active" data-filter="*">All</li>
+        <li (click)="filter(this.$event)" *ngFor="let category of categoriesObservable | async" [attr.data-filter]="'.'+category">{{category}}</li>
       </ul>
     </div>
-    <div *ngIf="itemsObservable | async" class=" mb-5">
+    <div class=" mb-5">
       <div class="portfolio-item row justify-content-center justify-content-md-start">
-        <div *ngFor="let project of itemsObservable | async" class="{{project.category}}">
-          <div class="item-style wow zoomIn" [ngStyle]="{'background-image': 'url(' + project.img + ')'}">
+        <div *ngFor="let project of itemsObservable | async" [ngClass]="project.category+' item col-lg-4 col-md-4 col-8 mb-5'">
+          <div class="item-style wow zoomIn shadow">
+            <figure class="figure">
+              <img [src]="projectThumbnailName(project)" class="img-fluid rounded image-size" alt="{{project.name | uppercase}} Image" >
+            </figure>
             <div (click)="openDialog(project)" class="item-actions">
-              <!-- <a class="link demo" href={{item.gitURL}}><i class="fab fa-github btn-icon"></i>GitHub</a>
-              <a class="link demo" href={{item.demoURL}}><i class="fas fa-link btn-icon"></i>Live</a> -->
+              <span class="mb-3"> {{project.name | titlecase }} </span>
               <img class="zoom" src="../../../assets/images/zoom.png">
             </div>
           </div>
+          <div class="py-2 text-center"> {{project.name | titlecase }} </div>
         </div>
       </div>
     </div>

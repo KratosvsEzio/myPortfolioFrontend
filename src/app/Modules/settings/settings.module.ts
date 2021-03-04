@@ -9,8 +9,10 @@ import {
   MatButtonModule,
   MatExpansionModule,
   MatProgressSpinnerModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatChipsModule
 } from '@angular/material';
+import { MatIconModule } from '@angular/material/icon';
 
 // Components
 import { SettingsComponent } from './settings.component';
@@ -28,7 +30,6 @@ const routes: Routes = [
       { path: 'education', component: EducationComponent },
       { path: 'portfolio', component: PortfolioComponent },
       { path: 'about', component: AboutComponent },
-      { path: '', redirectTo: 'profile', pathMatch: 'full'},
     ]
   }
 ];
@@ -40,7 +41,8 @@ const routes: Routes = [
     SkillsComponent,
     EducationComponent,
     PortfolioComponent,
-    AboutComponent],
+    AboutComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -52,9 +54,11 @@ const routes: Routes = [
       MatExpansionModule,
       MatProgressSpinnerModule,
       MatSnackBarModule,
+      MatChipsModule,
+      MatIconModule
     ],
     RouterModule.forChild(routes),
   ],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class SettingsModule { }

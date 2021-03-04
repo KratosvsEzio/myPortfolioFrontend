@@ -23,4 +23,5 @@
   -moz-transform: translate(-50%, -35%);
   -ms-transform: translate(-50%, -35%);
   -o-transform: translate(-50%, -35%);
+  object-fit: cover;
 }

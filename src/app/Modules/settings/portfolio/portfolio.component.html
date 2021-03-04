@@ -13,11 +13,12 @@
         <mat-accordion>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              <mat-spinner class="mr-1" [diameter]="22" *ngIf="!isloading && i=== eventCaller"></mat-spinner>
+              <mat-spinner class="mr-1" [diameter]="22" *ngIf="!isloading && i === eventCaller"></mat-spinner>
               {{portfolios[i].name}}
             </mat-expansion-panel-header>
             <div class="d-flex flex-column">
-              <!-- Portfolio Image URL Input Field -->
+
+              <!------------------------------ Portfolio Image URL Input Field --------------------------------------->
               <mat-form-field  class="mt-1" appearance="standard">
 
                 <!-- Input Label -->
@@ -29,7 +30,7 @@
                 <input class="input" formControlName='img' type="text" matInput>
               </mat-form-field>
 
-              <!-- Portfolio Project Name Input Field -->
+              <!------------------------------ Portfolio Project Name Input Field ----------------------------------->
               <mat-form-field  class="mt-1" appearance="standard">
 
                 <!-- Input Label -->
@@ -41,7 +42,7 @@
                 <input class="input" formControlName='name' type="text" matInput>
               </mat-form-field>
 
-              <!-- Portfolio Category Input Field -->
+              <!------------------------------ Portfolio Category Input Field --------------------------------------->
               <mat-form-field  class="mt-1" appearance="standard">
 
                 <!-- Input Label -->
@@ -53,7 +54,7 @@
                 <input class="input" formControlName='category' type="text" matInput>
               </mat-form-field>
 
-              <!-- Portfolio Demo URL Input Field -->
+              <!------------------------------ Portfolio Demo URL Input Field --------------------------------------->
               <mat-form-field  class="mt-1" appearance="standard">
 
                 <!-- Input Label -->
@@ -65,7 +66,7 @@
                 <input class="input" formControlName='demoURL' type="text" matInput>
               </mat-form-field>
 
-              <!-- Portfolio Github URL Input Field -->
+              <!------------------------------ Portfolio Github URL Input Field --------------------------------------->
               <mat-form-field  class="mt-1" appearance="standard">
 
                 <!-- Input Label -->
@@ -74,10 +75,271 @@
                 <!-- Input -->
                 <!-- use "[formControl]='formGroupName.get(formControlName)'"
                     instead of "formControlName=fromControlName"  -->
-                <input class="input" formControlName='gitURL' type="text" matInput>
+                <input class="input" [formControl]="item.get('gitURL')" type="text" matInput>
               </mat-form-field>
+
+              <!------------------------------ Portfolio Frontend Input Field --------------------------------------->
+
+              <span class="front-end d-flex flex-column border border-primary p-2 mb-2" [formGroup]="item.get('frontend')">
+                <div class="d-flex flex-column w-100">
+                  <div class="d-flex w-100 justify-content-between align-items-center">
+                    <label class="front-end-label">Frontend </label>
+
+                    <!---------------------------- Add new Frontend button -------------------------------------------->
+                    <span>
+                      <button #button (click)="addNewItem(i, 'frontend')"
+                        class="btn btn-primary btn-sm font-weight-400 text-capitalize">Add New</button>
+                    </span>
+
+                  </div>
+                  <div class="d-flex flex-wrap">
+                      <mat-form-field class="item-width">
+                        <input placeholder="Frontend Name" matInput formControlName='name'>
+                      </mat-form-field>
+                      <mat-form-field class="px-1 item-width">
+                        <input placeholder="Frontend Url" matInput formControlName='url'>
+                      </mat-form-field>
+                      <mat-form-field class="item-width">
+                        <input placeholder="Frontend Icon" matInput formControlName='icon'>
+                      </mat-form-field>
+                  </div>
+                </div>
+
+                <mat-chip-list #chipList aria-label="Front-End" class="mb-3">
+                  <mat-chip *ngFor="let frontend of description[i]?.frontend" [selectable]="selectable"
+                          [removable]="removable" (removed)="remove(frontend, 'frontend')">
+                    {{frontend.name}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+
+              </span>
+
+              <!------------------------------ Portfolio Backend Input Field --------------------------------------->
+
+              <span class="front-end d-flex flex-column border border-primary p-2 mb-2" [formGroup]="item.get('backend')">
+                <div class="d-flex flex-column w-100">
+                  <div class="d-flex w-100 justify-content-between align-items-center">
+                    <label class="front-end-label">Backend </label>
+
+                    <!---------------------------- Add new Backend button -------------------------------------------->
+                    <span>
+                      <button #button (click)="addNewItem(i, 'backend')"
+                        class="btn btn-primary btn-sm font-weight-400 text-capitalize">Add New</button>
+                    </span>
+
+                  </div>
+                  <div class="d-flex">
+                    <mat-form-field class="item-width">
+                      <input placeholder="Backend Name" matInput formControlName='name'>
+                    </mat-form-field>
+                    <mat-form-field class="px-1 item-width">
+                      <input placeholder="Backend Url" matInput formControlName='url'>
+                    </mat-form-field>
+                    <mat-form-field class="item-width">
+                      <input placeholder="Backend Icon" matInput formControlName='icon'>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <mat-chip-list #chipList aria-label="Front-End" class="mb-3">
+                  <mat-chip *ngFor="let backend of description[i]?.backend" [selectable]="selectable"
+                          [removable]="removable" (removed)="remove(backend, 'backend')">
+                    {{backend.name}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+
+              </span>
+
+              <!------------------------------ Portfolio Framework Input Field --------------------------------------->
+
+              <span class="front-end d-flex flex-column border border-primary p-2 mb-2" [formGroup]="item.get('framework')">
+                <div class="d-flex flex-column w-100">
+                  <div class="d-flex w-100 justify-content-between align-items-center">
+                    <label class="front-end-label">CSS </label>
+
+                    <!---------------------------- Add new Framework button -------------------------------------------->
+                    <span>
+                      <button #button (click)="addNewItem(i, 'framework')"
+                        class="btn btn-primary btn-sm font-weight-400 text-capitalize">Add New</button>
+                    </span>
+
+                  </div>
+                  <div class="d-flex">
+                    <mat-form-field class="item-width">
+                      <input placeholder="CSS Name" matInput formControlName='name'>
+                    </mat-form-field>
+                    <mat-form-field class="px-1 item-width">
+                      <input placeholder="CSS Url" matInput formControlName='url'>
+                    </mat-form-field>
+                    <mat-form-field class="item-width">
+                      <input placeholder="CSS Icon" matInput formControlName='icon'>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <mat-chip-list #chipList aria-label="Front-End" class="mb-3">
+                  <mat-chip *ngFor="let framework of description[i]?.framework" [selectable]="selectable"
+                          [removable]="removable" (removed)="remove(framework, 'framework')">
+                    {{framework.name}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+
+              </span>
+
+              <!------------------------------ Portfolio library Input Field --------------------------------------->
+
+              <span class="front-end d-flex flex-column border border-primary p-2 mb-2" [formGroup]="item.get('library')">
+                <div class="d-flex flex-column w-100">
+                  <div class="d-flex w-100 justify-content-between align-items-center">
+                    <label class="front-end-label">Plugin </label>
+
+                    <!---------------------------- Add new library button -------------------------------------------->
+                    <span>
+                      <button #button (click)="addNewItem(i, 'library')"
+                        class="btn btn-primary btn-sm font-weight-400 text-capitalize">Add New</button>
+                    </span>
+                  </div>
+
+                  <div class="d-flex flex-wrap">
+                      <mat-form-field class="item-width">
+                        <input placeholder="Plugin Name" matInput formControlName='name'>
+                      </mat-form-field>
+                      <mat-form-field class="px-1 item-width">
+                        <input placeholder="Plugin Url" matInput formControlName='url'>
+                      </mat-form-field>
+                      <mat-form-field class="item-width">
+                        <input placeholder="Plugin Icon" matInput formControlName='icon'>
+                      </mat-form-field>
+                  </div>
+                </div>
+
+                <mat-chip-list #chipList aria-label="Front-End" class="mb-3">
+                  <mat-chip *ngFor="let library of description[i]?.library" [selectable]="selectable"
+                          [removable]="removable" (removed)="remove(library, 'library')">
+                    {{library.name}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+
+              </span>
+
+              <!------------------------------ Portfolio Database Input Field --------------------------------------->
+
+              <span class="front-end d-flex flex-column border border-primary p-2 mb-2" [formGroup]="item.get('database')">
+                <div class="d-flex flex-column w-100">
+                  <div class="d-flex w-100 justify-content-between align-items-center">
+                    <label class="front-end-label">Database </label>
+
+                    <!---------------------------- Add new Database button -------------------------------------------->
+                    <span>
+                      <button #button (click)="addNewItem(i, 'database')"
+                        class="btn btn-primary btn-sm font-weight-400 text-capitalize">Add New</button>
+                    </span>
+
+                  </div>
+                  <div class="d-flex flex-wrap">
+                      <mat-form-field class="item-width">
+                        <input placeholder="Database Name" matInput formControlName='name'>
+                      </mat-form-field>
+                      <mat-form-field class="px-1 item-width">
+                        <input placeholder="Database Url" matInput formControlName='url'>
+                      </mat-form-field>
+                      <mat-form-field class="item-width">
+                        <input placeholder="Database Icon" matInput formControlName='icon'>
+                      </mat-form-field>
+                  </div>
+                </div>
+
+                <mat-chip-list #chipList aria-label="Front-End" class="mb-3">
+                  <mat-chip *ngFor="let database of description[i]?.database" [selectable]="selectable"
+                          [removable]="removable" (removed)="remove(database, 'database')">
+                    {{database.name}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+
+              </span>
+
+              <!------------------------------ Portfolio Font Input Field --------------------------------------->
+
+              <span class="front-end d-flex flex-column border border-primary p-2 mb-2" [formGroup]="item.get('font')">
+                <div class="d-flex flex-column w-100">
+                  <div class="d-flex w-100 justify-content-between align-items-center">
+                    <label class="front-end-label">Font </label>
+
+                    <!---------------------------- Add new Font button -------------------------------------------->
+                    <span>
+                      <button #button (click)="addNewItem(i, 'font')"
+                        class="btn btn-primary btn-sm font-weight-400 text-capitalize">Add New</button>
+                    </span>
+
+                  </div>
+                  <div class="d-flex flex-wrap">
+                      <mat-form-field class="item-width">
+                        <input placeholder="Font Name" matInput formControlName='name'>
+                      </mat-form-field>
+                      <mat-form-field class="px-1 item-width">
+                        <input placeholder="Font Url" matInput formControlName='url'>
+                      </mat-form-field>
+                      <mat-form-field class="item-width">
+                        <input placeholder="Font Icon" matInput formControlName='icon'>
+                      </mat-form-field>
+                  </div>
+                </div>
+
+                <mat-chip-list #chipList aria-label="Front-End" class="mb-3">
+                  <mat-chip *ngFor="let font of description[i]?.font" [selectable]="selectable"
+                          [removable]="removable" (removed)="remove(font, 'font')">
+                    {{font.name}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+
+              </span>
+
+              <!------------------------------ Portfolio Icon Input Field --------------------------------------->
+
+              <span class="front-end d-flex flex-column border border-primary p-2 mb-2" [formGroup]="item.get('icon')">
+                <div class="d-flex flex-column w-100">
+                  <div class="d-flex w-100 justify-content-between align-items-center">
+                    <label class="front-end-label">Icon </label>
+
+                    <!---------------------------- Add new Icon button -------------------------------------------->
+                    <span>
+                      <button #button (click)="addNewItem(i, 'icon')"
+                        class="btn btn-primary btn-sm font-weight-400 text-capitalize">Add New</button>
+                    </span>
+
+                  </div>
+                  <div class="d-flex flex-wrap">
+                      <mat-form-field class="item-width">
+                        <input placeholder="Icon Name" matInput formControlName='name'>
+                      </mat-form-field>
+                      <mat-form-field class="px-1 item-width">
+                        <input placeholder="Icon Url" matInput formControlName='url'>
+                      </mat-form-field>
+                      <mat-form-field class="item-width">
+                        <input placeholder="Icon Icon" matInput formControlName='icon'>
+                      </mat-form-field>
+                  </div>
+                </div>
+
+                <mat-chip-list #chipList aria-label="Front-End" class="mb-3">
+                  <mat-chip *ngFor="let icon of description[i]?.icon" [selectable]="selectable"
+                          [removable]="removable" (removed)="remove(icon, 'icon')">
+                    {{icon.name}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+
+              </span>
+
             </div>
 
+              <!------------------------------ Action Buttons ------------------------------------------------------->
             <div class="btn-group float-right">
               <button type="button" class="btn-sm btn-primary mr-1" (click)="save(i, item)">Save</button>
               <button type='button' class="btn-sm btn-warning" (click)='delete(i)'>Delete</button>
@@ -88,9 +350,10 @@
       </div>
     </div>
   </div>
+
+  <!-- In case data was not found -->
   <ng-template #noItems>
-    <div *ngIf="isloading && eventCaller === -1"
-    class="col-md-8 d-flex flex-column justify-content-center text-center">
+    <div *ngIf="isloading && eventCaller === -1" class="col-md-8 d-flex flex-column justify-content-center text-center">
       No items found in database
     </div>
   </ng-template>

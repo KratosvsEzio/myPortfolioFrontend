@@ -37,7 +37,34 @@ button{
   background: -webkit-linear-gradient(0deg, #766dff 0%, #88f3ff 100%);
 }
 
+/* Custom Angular Material Dialog Box CSS */
+.custom-modalbox .mat-dialog-container {
+  padding: 0;
+  overflow-y: scroll;
+  max-width: 90vw;
+  max-height: 90vh;
+}
 
+.custom-modalbox .mat-dialog-container::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+.custom-modalbox .mat-dialog-container::-webkit-scrollbar {
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+.custom-modalbox .mat-dialog-container::-webkit-scrollbar-thumb {
+	border-radius: 6px;
+	background-color: #5e72e4;
+  /* background-image: -webkit-gradient(linear, 40% 0%, 75% 84%, from(#281483), to(#281483), color-stop(.6,#d782d9)); */
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-ms-border-radius: 6px;
+	-o-border-radius: 6px;
+}
 
 /* custom Animations */
 

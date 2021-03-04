@@ -33,6 +33,7 @@
     "isotope-layout": "^3.0.6",
     "jquery": "^3.4.1",
     "jquery-bridget": "^2.0.1",
+    "ngx-pipes": "^2.7.3",
     "path": "^0.12.7",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",

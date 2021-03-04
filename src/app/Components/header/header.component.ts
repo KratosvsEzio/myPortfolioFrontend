@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as $ from 'jquery';
 import * as Headroom from '../../../assets/vendor/headroom/headroom.min.js';
-import { SigninService } from 'src/app/Service/signin.service.js';
+import { SigninService } from 'src/app/Service/signin.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,9 +13,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private header: any;
   isAuthObservable: Observable<boolean>;
-  isAuth: boolean;
+  isAuth: boolean = false;
 
-  constructor(private signinService: SigninService) { }
+  constructor(
+    private signinService: SigninService,
+  ) { }
 
   ngOnInit() {
     this.isAuthObservable = this.signinService.getIsAuth();

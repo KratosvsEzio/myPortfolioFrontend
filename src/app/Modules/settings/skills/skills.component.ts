@@ -26,7 +26,7 @@ export class SkillsComponent implements OnInit {
   skillsForm: FormGroup;
   isloading = false;
   eventCaller = -1;
-  // tslint:disable-next-line: variable-name
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,

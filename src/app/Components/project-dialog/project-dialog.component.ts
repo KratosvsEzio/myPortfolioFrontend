@@ -13,18 +13,20 @@ export class ProjectDialogComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<ProjectDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) project
+    @Inject(MAT_DIALOG_DATA) project: portfolioData
   ) {
     this.project = project;
   }
 
   ngOnInit() {
+    console.log(this.project);
   }
+
   save() {
     // this.dialogRef.close(this.form.value);
   }
 
   close() {
-      this.dialogRef.close();
+    this.dialogRef.close();
   }
 }

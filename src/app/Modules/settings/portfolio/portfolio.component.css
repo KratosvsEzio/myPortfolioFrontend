@@ -1,0 +1,23 @@
+.front-end{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.front-end-label{
+  /* flex: 35%; */
+  font-weight: 500;
+  margin: 0;
+  line-height: 23px;
+}
+
+.front-end-items{
+  flex: 70%;
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.item-width{
+  width: 33%;
+}
