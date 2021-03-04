@@ -22,16 +22,16 @@ import { AuthInterceptor } from './Service/auth-interceptor';
 import { NgPipesModule } from 'ngx-pipes';
 
 // Auth0
-const config = new AuthServiceConfig([
-  {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('5126203523-o4445m07k6m6kjj9313p8flpd2meqmpd.apps.googleusercontent.com')
-  }
-]);
+// const config = new AuthServiceConfig([
+//   {
+//     id: GoogleLoginProvider.PROVIDER_ID,
+//     provider: new GoogleLoginProvider('5126203523-o4445m07k6m6kjj9313p8flpd2meqmpd.apps.googleusercontent.com')
+//   }
+// ]);
 
-export function provideConfig() {
-  return config;
-}
+// export function provideConfig() {
+//   return config;
+// }
 
 @NgModule({
   declarations: [
@@ -46,8 +46,8 @@ export function provideConfig() {
     BrowserModule,
     MatDialogModule,
     // Auth0 Module
-    // SocialLoginModule,
-    SocialLoginModule.initialize(config),
+    SocialLoginModule,
+    // SocialLoginModule.initialize(config),
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -65,7 +65,12 @@ export function provideConfig() {
     // Auth0 provider to all app
     {
       provide: AuthServiceConfig,
-      useFactory: provideConfig
+      useFactory: () => { return new AuthServiceConfig([ {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('5126203523-o4445m07k6m6kjj9313p8flpd2meqmpd.apps.googleusercontent.com')
+          }
+        ])
+      }
     },
     {
     provide: HTTP_INTERCEPTORS,
