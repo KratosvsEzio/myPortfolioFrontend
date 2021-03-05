@@ -13,8 +13,8 @@
         <mat-accordion>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              <mat-spinner class="mr-1" [diameter]="22" *ngIf="!isloading && i === eventCaller"></mat-spinner>
-              {{portfolios[i].name}}
+              <mat-spinner class="mr-1" [diameter]="22" *ngIf="!isloading"></mat-spinner>
+              {{portfolios[i]?.name}}
             </mat-expansion-panel-header>
             <div class="d-flex flex-column">
 
@@ -107,7 +107,7 @@
 
                 <mat-chip-list #chipList aria-label="Front-End" class="mb-3">
                   <mat-chip *ngFor="let frontend of description[i]?.frontend" [selectable]="selectable"
-                          [removable]="removable" (removed)="remove(frontend, 'frontend')">
+                          [removable]="removable" (removed)="remove(i, frontend, 'frontend')">
                     {{frontend.name}}
                     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                   </mat-chip>
@@ -144,7 +144,7 @@
 
                 <mat-chip-list #chipList aria-label="Front-End" class="mb-3">
                   <mat-chip *ngFor="let backend of description[i]?.backend" [selectable]="selectable"
-                          [removable]="removable" (removed)="remove(backend, 'backend')">
+                          [removable]="removable" (removed)="remove(i, backend, 'backend')">
                     {{backend.name}}
                     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                   </mat-chip>
@@ -181,7 +181,7 @@
 
                 <mat-chip-list #chipList aria-label="Front-End" class="mb-3">
                   <mat-chip *ngFor="let framework of description[i]?.framework" [selectable]="selectable"
-                          [removable]="removable" (removed)="remove(framework, 'framework')">
+                          [removable]="removable" (removed)="remove(i, framework, 'framework')">
                     {{framework.name}}
                     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                   </mat-chip>
@@ -218,7 +218,7 @@
 
                 <mat-chip-list #chipList aria-label="Front-End" class="mb-3">
                   <mat-chip *ngFor="let library of description[i]?.library" [selectable]="selectable"
-                          [removable]="removable" (removed)="remove(library, 'library')">
+                          [removable]="removable" (removed)="remove(i, library, 'library')">
                     {{library.name}}
                     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                   </mat-chip>
@@ -255,7 +255,7 @@
 
                 <mat-chip-list #chipList aria-label="Front-End" class="mb-3">
                   <mat-chip *ngFor="let database of description[i]?.database" [selectable]="selectable"
-                          [removable]="removable" (removed)="remove(database, 'database')">
+                          [removable]="removable" (removed)="remove(i, database, 'database')">
                     {{database.name}}
                     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                   </mat-chip>
@@ -292,7 +292,7 @@
 
                 <mat-chip-list #chipList aria-label="Front-End" class="mb-3">
                   <mat-chip *ngFor="let font of description[i]?.font" [selectable]="selectable"
-                          [removable]="removable" (removed)="remove(font, 'font')">
+                          [removable]="removable" (removed)="remove(i, font, 'font')">
                     {{font.name}}
                     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                   </mat-chip>
@@ -329,7 +329,7 @@
 
                 <mat-chip-list #chipList aria-label="Front-End" class="mb-3">
                   <mat-chip *ngFor="let icon of description[i]?.icon" [selectable]="selectable"
-                          [removable]="removable" (removed)="remove(icon, 'icon')">
+                          [removable]="removable" (removed)="remove(i, icon, 'icon')">
                     {{icon.name}}
                     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                   </mat-chip>

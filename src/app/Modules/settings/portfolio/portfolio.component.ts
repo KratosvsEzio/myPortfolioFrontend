@@ -78,8 +78,9 @@ export class PortfolioComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   description: Description[] | any =  [];
 
-  remove(item: any, key: string): void {
-    this.description[key] = this.description[key].filter(frontend => frontend.name !== item.name );
+  remove(i: number, data: any, key: string): void {
+    // console.log('remove new item', this.description, this.description[key], data, key, i);
+    this.description[i][key] = this.description[i][key].filter(item => item.name !== data.name );
   }
 
   ngOnInit() {
@@ -113,13 +114,17 @@ export class PortfolioComponent implements OnInit {
           icon: []
         });
 
-        p.description.frontend.forEach(element => this.addNewItem(i, 'frontend', element));
-        p.description.backend.forEach(element => this.addNewItem(i, 'backend', element));
-        p.description.framework.forEach(element => this.addNewItem(i, 'framework', element));
-        p.description.library.forEach(element => this.addNewItem(i, 'library', element));
-        p.description.database.forEach(element => this.addNewItem(i, 'database', element));
-        p.description.font.forEach(element => this.addNewItem(i, 'font', element));
-        p.description.icon.forEach(element => this.addNewItem(i, 'icon', element));
+        // console.log('description defore = ', this.description)
+
+        p.description.frontend ? p.description.frontend.forEach(element => this.addNewItem(i, 'frontend', element)) : '';
+        p.description.backend ? p.description.backend.forEach(element => this.addNewItem(i, 'backend', element)) : '';
+        p.description.framework ? p.description.framework.forEach(element => this.addNewItem(i, 'framework', element)) : '';
+        p.description.library ? p.description.library.forEach(element => this.addNewItem(i, 'library', element)) : '';
+        p.description.database ? p.description.database.forEach(element => this.addNewItem(i, 'database', element)) : '';
+        p.description.font ? p.description.font.forEach(element => this.addNewItem(i, 'font', element)) : '';
+        p.description.icon ? p.description.icon.forEach(element => this.addNewItem(i, 'icon', element)) : '';
+
+        // console.log('description after = ', this.description);
       });
     });
   }
@@ -164,11 +169,11 @@ export class PortfolioComponent implements OnInit {
       this.listArray.controls[listArrayIndex].get(key).reset();
 
     } else{
-      this.description.push({});
+
       this.description[listArrayIndex][key].unshift({
-        name: value.name,
-        url: value.url,
-        icon: value.icon,
+        name: value.name ? value.name : '',
+        url: value.url ? value.url : '',
+        icon: value.icon ? value.icon : '',
       });
     }
   }
