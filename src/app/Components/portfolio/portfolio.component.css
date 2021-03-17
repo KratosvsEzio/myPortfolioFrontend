@@ -153,4 +153,5 @@
   height: calc(100% - 33px);
   width: 100%;
   object-fit: contain;
+  object-position: top;
 }

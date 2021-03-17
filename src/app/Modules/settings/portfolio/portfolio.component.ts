@@ -202,7 +202,7 @@ export class PortfolioComponent implements OnInit {
       demoURL: '',
       gitURL: '',
     }));
-    this.description.push({
+    this.description.unshift({
       frontend: [],
       backend: [],
       framework: [],
@@ -256,7 +256,7 @@ export class PortfolioComponent implements OnInit {
     };
 
     // Call Api for Edit Portfolio
-    this.userService.editPortfolio(newProject);
+    p._id ? this.userService.editPortfolio(newProject) : this.userService.newPortfolio(newProject);
   }
 
   // ---------------------------Action performed when delete button is pressed-------------------------------------- //
