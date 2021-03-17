@@ -26,10 +26,17 @@ export class AboutComponent implements OnInit {
     this.userDataService.currentUpdatedUser.subscribe( (response: user) => {
       this.aboutMe = response.aboutMe;
       this.projects = response.projects;
-      for (let i = 0; this.loopCondition(i, response); i++) {
-        if (i < (response.skillCount / 2) && this.skillSet1.length < (response.skillCount / 2)) {
+      // for (let i = 0; this.loopCondition(i, response); i++) {
+      //   if (i < (response.skillCount / 2) && this.skillSet1.length < (response.skillCount / 2)) {
+      //     this.skillSet1.push(response.skills[i]);
+      //   } else if ( i >= (response.skillCount / 2) && this.skillSet2.length < (response.skillCount / 2)) {
+      //     this.skillSet2.push(response.skills[i]);
+      //   }
+      // }
+      for (let i = 0; i < response.skillCount; i++) {
+        if (i%2 === 0) {
           this.skillSet1.push(response.skills[i]);
-        } else if ( i >= (response.skillCount / 2) && this.skillSet2.length < (response.skillCount / 2)) {
+        } else {
           this.skillSet2.push(response.skills[i]);
         }
       }
