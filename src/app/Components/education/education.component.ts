@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../Service/user.service';
 import { educationData } from '../../Models/education.modal';
 import { user } from '../../Models/user.model';
 import { UserDataService } from 'src/app/Service/user-data.service';
@@ -12,19 +11,22 @@ import { UserDataService } from 'src/app/Service/user-data.service';
 export class EducationComponent implements OnInit {
 
   activeTab = 1;
-  items: educationData[];
+  education: educationData[];
+  experience: [];
+  items: any;
 
-  // tslint:disable-next-line: variable-name
   constructor( private userDataService: UserDataService) {
   }
 
   ngOnInit() {
     this.userDataService.currentUpdatedUser.subscribe( (response: user) => {
+      this.education = response.education;
       this.items = response.education;
     });
   }
 
   tabs(tab: number) {
     this.activeTab = tab;
+    this.items = tab === 1 ? this.education : this.experience;
   }
 }
