@@ -11,6 +11,8 @@ import { AboutComponent } from 'src/app/Components/about/about.component';
 import { EducationComponent } from 'src/app/Components/education/education.component';
 import { PortfolioComponent } from 'src/app/Components/portfolio/portfolio.component';
 import { ContactComponent } from 'src/app/Components/contact/contact.component';
+import { ProjectsComponent } from 'src/app/Components/projects/projects.component';
+import { SkillsComponent } from 'src/app/Components/skills/skills.component';
 
 // Modules
 import { NgModule } from '@angular/core';
@@ -46,6 +48,8 @@ const routes: Routes = [
     ContactComponent,
     ProfilepageComponent,
     PermissionComponent,
+    ProjectsComponent,
+    SkillsComponent,
   ],
   imports: [
     CommonModule,

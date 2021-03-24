@@ -2,9 +2,9 @@
 <div class="section">
   <div class="container res-767">
     <div class="education-section row justify-content-center">
-      <div class="tabs">
-        <div class="tab-item" (click)="tabs(1)" [ngClass]="{'activeTab': activeTab === 1}">Education</div>
-        <div class="tab-item" (click)="tabs(2)" [ngClass]="{'activeTab': activeTab === 2}"*ngIf="false">Experience</div>
+      <div class="tabs d-flex">
+        <div class="tab-item mr-2" (click)="tabs(1)" [ngClass]="{'activeTab': activeTab === 1}">Education</div>
+        <div class="tab-item" (click)="tabs(2)" [ngClass]="{'activeTab': activeTab === 2}">Experience</div>
       </div>
     </div>
     <div class="tabsData">
@@ -19,4 +19,5 @@
       </ul>
     </div>
   </div>
+  <div class="clip"></div>
 </div>

@@ -12,7 +12,7 @@
 </mat-dialog-actions> -->
 
 <div class="custom-dialog-section p-4">
-  <div class="project-top d-md-flex">
+  <div class="project-top d-lg-flex">
 
     <!-- Project Image -->
     <div class="project-poster d-flex flex-column">
@@ -62,7 +62,7 @@
       </div>
     </div>
 
-    <div class="project-info pl-md-3 d-flex flex-column">
+    <div class="project-info pl-lg-3 d-flex flex-column">
 
       <!-- Project Title -->
       <h1 class="project-title p-name order-1">
@@ -82,7 +82,7 @@
           <label>Front-End:</label>
           <span *ngFor="let frontend of project.description.frontend">
             <a [href]="frontend.url" target="_blank" [title]="frontend.url" class="badge badge-pill badge-primary mx-1">
-              <img *ngIf="frontend.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+frontend.icon+'.svg'" [alt]="frontend.icon+' icon'">
+              <img class="mr-2" *ngIf="frontend.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+frontend.icon+'.svg'" [alt]="frontend.icon+' icon'">
               {{frontend.name | titlecase}}
             </a>
           </span>
@@ -92,7 +92,7 @@
           <label>Back-End:</label>
           <span *ngFor="let backend of project.description.backend">
             <a [href]="backend.url" target="_blank" [title]="backend.url" class="badge badge-pill badge-primary mx-1">
-              <img *ngIf="backend.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+backend.icon+'.svg'" [alt]="backend.icon+' icon'">
+              <img class="mr-2" *ngIf="backend.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+backend.icon+'.svg'" [alt]="backend.icon+' icon'">
               {{backend.name | titlecase}}
             </a>
           </span>
@@ -102,7 +102,7 @@
           <label>Frameworks:</label>
           <span *ngFor="let framework of project.description.framework">
             <a [href]="framework.url" target="_blank" [title]="framework.url" class="badge badge-pill badge-primary mx-1">
-              <img *ngIf="framework.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+framework.icon+'.svg'" [alt]="framework.icon+' icon'">
+              <img class="mr-2" *ngIf="framework.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+framework.icon+'.svg'" [alt]="framework.icon+' icon'">
               {{framework.name | titlecase}}
             </a>
           </span>
@@ -112,7 +112,7 @@
           <label>Database:</label>
           <span *ngFor="let database of project.description.database">
             <a [href]="database.url" target="_blank" [title]="database.url" class="badge badge-pill badge-primary mx-1">
-              <img *ngIf="database.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+database.icon+'.svg'" [alt]="database.icon+' icon'">
+              <img class="mr-2" *ngIf="database.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+database.icon+'.svg'" [alt]="database.icon+' icon'">
               {{database.name | titlecase}}
             </a>
           </span>
@@ -122,7 +122,7 @@
           <label>Plugin:</label>
           <span *ngFor="let library of project.description.library">
             <a [href]="library.url" target="_blank" [title]="library.url" class="badge badge-pill badge-primary mx-1">
-              <img *ngIf="library.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+library.icon+'.svg'" [alt]="library.icon+' icon'">
+              <img class="mr-2" *ngIf="library.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+library.icon+'.svg'" [alt]="library.icon+' icon'">
               {{library.name | titlecase}}
             </a>
           </span>
@@ -132,7 +132,7 @@
           <label>Fonts:</label>
           <span *ngFor="let font of project.description.font">
             <a [href]="font.url" target="_blank" [title]="font.url" class="badge badge-pill badge-primary mx-1">
-              <img *ngIf="font.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+font.icon+'.svg'" [alt]="font.icon+' icon'">
+              <img class="mr-2" *ngIf="font.icon !== ''"  width="16" height="16" [src]="'assets/icons/'+font.icon+'.svg'" [alt]="font.icon+' icon'">
               {{font.name | titlecase}}
             </a>
           </span>
@@ -142,7 +142,7 @@
           <label>Icons:</label>
           <span *ngFor="let icon of project.description.icon">
             <a [href]="icon.url" target="_blank" [title]="icon.url" class="badge badge-pill badge-primary mx-1">
-              <img *ngIf="icon.icon !== ''" width="16" height="16" [src]="'assets/icons/'+icon.icon+'.svg'" [alt]="icon.icon+' icon'">
+              <img class="mr-2" *ngIf="icon.icon !== ''" width="16" height="16" [src]="'assets/icons/'+icon.icon+'.svg'" [alt]="icon.icon+' icon'">
               {{icon.name | titlecase}}
             </a>
           </span>

@@ -1,10 +1,23 @@
+@media (max-width: 575px){
+}
+
+@media (max-width: 767.98px){
+  .custom-dialog-section{
+    width: 90vw!important;
+  }
+
+  .image-size{
+    max-width: unset!important;
+  }
+}
+
 .custom-dialog-section{
-  /* overflow-y: scroll; */
   width: 60vw;
 }
 
 .image-size{
-  max-width: 350px;
+  width: 100%;
+  max-width: 240px;
   min-width: 240px;
   max-height: 380px;
   /* height: 100%; */
@@ -14,7 +27,9 @@
 
 .badge {
   font-size: 55%;
-  margin-bottom: 6px;
+  margin-bottom: 6px;    
+  display: inline-flex;
+  align-items: center;
 }
 
 label{

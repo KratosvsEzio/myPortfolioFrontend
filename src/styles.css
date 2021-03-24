@@ -38,11 +38,19 @@ button{
 }
 
 /* Custom Angular Material Dialog Box CSS */
+
+.cdk-overlay-pane{
+  padding: 0;
+  overflow-x: hidden;
+  max-width: 90vw!important;
+  max-height: 90vh!important;
+}
 .custom-modalbox .mat-dialog-container {
   padding: 0;
   overflow-y: scroll;
-  max-width: 90vw;
-  max-height: 90vh;
+  overflow-x: hidden;
+  max-width: 90vw!important;
+  max-height: 90vh!important;
 }
 
 .custom-modalbox .mat-dialog-container::-webkit-scrollbar-track {

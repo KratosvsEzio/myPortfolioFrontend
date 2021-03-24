@@ -1,5 +1,6 @@
 .section {
   position: relative;
+  overflow-x: hidden;
   padding-top: 4rem;
   padding-bottom: 4rem;
   margin-right: auto;
@@ -162,7 +163,7 @@
     -moz-transition: ease-in-out;
     -ms-transition: ease-in-out;
     -o-transition: ease-in-out;
-}
+  }
 }
 
 .fadeIn{
