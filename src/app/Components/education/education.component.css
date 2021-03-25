@@ -253,6 +253,7 @@
   padding-right: 100px;
   white-space: nowrap;
   padding-left: 90px;
+  min-width: 275px;
 }
 
 .degree{

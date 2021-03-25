@@ -21,12 +21,13 @@ export class EducationComponent implements OnInit {
   ngOnInit() {
     this.userDataService.currentUpdatedUser.subscribe( (response: user) => {
       this.education = response.education;
-      this.items = response.education;
+      // this.items = response.education;
     });
   }
 
   tabs(tab: number) {
     this.activeTab = tab;
-    this.items = tab === 1 ? this.education : this.experience;
+    this.items = tab === 1 ? this.education : [{date: 'Hello', degree: 'AHAN', institution: 'WOW'}];
+    console.log('itmes', this.items);
   }
 }
