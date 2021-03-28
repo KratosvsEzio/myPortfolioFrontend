@@ -21,7 +21,7 @@ export class EducationComponent implements OnInit {
   ngOnInit() {
     this.userDataService.currentUpdatedUser.subscribe( (response: user) => {
       this.education = response.education;
-      // this.items = response.education;
+      this.items = response.education;
     });
   }
 
