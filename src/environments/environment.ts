@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   name: 'dev',
   apiBaseUrl: 'http://localhost:4000'
+  // apiBaseUrl: 'https://my-profile-backend.herokuapp.com'
 };
 
 /*

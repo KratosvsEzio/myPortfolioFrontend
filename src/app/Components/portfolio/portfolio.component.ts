@@ -44,7 +44,10 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     // Fetch Data of categories from api
     this.categoriesObservable = this.userDataService.currentUpdatedUser.pipe(
       map( (data: user) => {
-        return this.categories = data.portfolio.map( item => item.category);
+        let category: any = new Set<any>();
+        data.portfolio.forEach( item => category.add(item.category));
+        console.log('categories', category);
+        return category;
       })
     );
 
