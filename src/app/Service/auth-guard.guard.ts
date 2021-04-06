@@ -22,7 +22,7 @@ export class AuthGuardGuard implements  CanActivate {
         this.router.navigate(['/profile/alijinnah19']);
       }
     });
-    // return this.signinService.getIsAuth();
-    return true;
+    return this.signinService.getIsAuth();
+    // return true;
   }
 }

@@ -18,7 +18,7 @@ export class SigninService {
   private user: SocialUser;
   private tokenTimer: any;
 
-  private auth = new BehaviorSubject<boolean>(true);
+  private auth = new BehaviorSubject<boolean>(false);
   authObservable: Observable<boolean> = this.auth.asObservable();
 
   private tokenId = new BehaviorSubject<string>('');
