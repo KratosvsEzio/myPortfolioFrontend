@@ -12,8 +12,10 @@
         <li *ngFor="let item of items" class= "data-item">
           <div class="time wow fadeInLeftElement">{{item.date}}</div>
           <div class="data-body wow fadeInRightElement">
-            <h4 class="degree">{{item.degree}}</h4>
+            <h4 *ngIf="item.degree" class="degree">{{item.degree}}</h4>
+            <h4 *ngIf="item.designation" class="degree">{{item.designation}}</h4>
             <h5 class="institution">{{item.institution}}</h5>
+            <h6 *ngIf="item.description" class="institution">{{item.description}}</h6>
           </div>
         </li>
       </ul>
