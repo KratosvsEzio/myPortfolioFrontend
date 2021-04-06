@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 import { shareReplay, tap, share, distinctUntilChanged, finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { UserDataService } from './user-data.service';
+import { experienceData } from '../Models/experience.modal';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class UserService {
   private aboutMeURL = this.environmentApiBaseUrl + '/api/about';
   private skillURL = this.environmentApiBaseUrl + '/api/skill';
   private educationURL = this.environmentApiBaseUrl + '/api/education';
+  private experienceURL = this.environmentApiBaseUrl + '/api/experience';
   private portfolioURL = this.environmentApiBaseUrl + '/api/portfolio';
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar, private userDataService: UserDataService) { }
@@ -126,6 +128,29 @@ export class UserService {
   // edit education in database
   deleteEducation( id: string ) {
     return this.http.delete<{message: string, status: boolean}>(this.educationURL + '/' + id).subscribe( (response) => {
+      this.updateMessage(response);
+    });
+  }
+
+  // ====================================== Experience Api========================================= //
+
+  // add new Experience in database
+  newExperience(ex: experienceData) {
+    return this.http.post<{message: string, status: boolean}>(this.experienceURL, ex).subscribe( (response) => {
+      this.updateMessage(response);
+    });
+  }
+
+  // edit Experience in database
+  editExperience(ex: experienceData) {
+    return this.http.put<{message: string, status: boolean}>(this.experienceURL + '/' + ex._id, ex).subscribe( (response) => {
+      this.updateMessage(response);
+    });
+  }
+
+  // edit Experience in database
+  deleteExperience( id: string ) {
+    return this.http.delete<{message: string, status: boolean}>(this.experienceURL + '/' + id).subscribe( (response) => {
       this.updateMessage(response);
     });
   }
