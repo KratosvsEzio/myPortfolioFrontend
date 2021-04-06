@@ -21,6 +21,7 @@ import { SkillsComponent } from './skills/skills.component';
 import { EducationComponent } from './education/education.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { AboutComponent } from './about/about.component';
+import { ExperienceComponent } from './experience/experience.component';
 
 const routes: Routes = [
   { path: '', component: SettingsComponent,
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'skills/:pageNumber', component: SkillsComponent },
       { path: 'education', component: EducationComponent },
+      { path: 'experience', component: ExperienceComponent },
       { path: 'portfolio', component: PortfolioComponent },
       { path: 'about', component: AboutComponent },
     ]
@@ -42,6 +44,7 @@ const routes: Routes = [
     EducationComponent,
     PortfolioComponent,
     AboutComponent,
+    ExperienceComponent,
   ],
   imports: [
     CommonModule,
