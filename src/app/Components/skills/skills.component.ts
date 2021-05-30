@@ -16,6 +16,9 @@ export class SkillsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.skillSet1 = [];
+    this.skillSet2 = []; 
+
     this.userDataService.currentUpdatedUser.subscribe( (response: user) => {
       for (let i = 0; i < response.skillCount; i++) {
         if (i%2 === 0) {
