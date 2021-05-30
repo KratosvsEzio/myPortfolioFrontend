@@ -1,4 +1,5 @@
 import { educationData } from './education.modal';
+import { experienceData } from './experience.modal';
 import { portfolioData } from './portfolioData.model';
 import { profileData } from './profile.model';
 
@@ -10,6 +11,7 @@ export interface user {
     workingOn: number;
   };
   education: educationData[];
+  experience: experienceData[];
   portfolio: portfolioData[];
   skills: {
     _id: string;

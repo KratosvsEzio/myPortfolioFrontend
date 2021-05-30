@@ -23,6 +23,6 @@ export class AuthGuardGuard implements  CanActivate {
       }
     });
     return this.signinService.getIsAuth();
-    return true;
+    // return true;
   }
 }

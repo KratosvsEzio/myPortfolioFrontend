@@ -24,6 +24,7 @@ export class UserDataService {
       workingOn: 0
     },
     education: [],
+    experience: [],
     portfolio: [],
     skills: [],
     skillCount: 0
